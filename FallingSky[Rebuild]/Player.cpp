@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(String PlayerPath, Vector2i SpriteCount) :
+Player::Player(String PlayerPath, Vector2u SpriteCount) :
 	animation(SpriteCount)
 {
 	this->PlayerPath = PlayerPath;
@@ -19,8 +19,9 @@ void Player::CreateSprite()
 
 void Player::Update(float DeltaTime, float SwitchTime)
 {
+	
 	CreateSprite();
-	animation.animation(Sprite, DeltaTime, SwitchTime);
+	animation.animation(&Sprite, DeltaTime, SwitchTime);
 }
 
 void Player::draw(RenderWindow * window)

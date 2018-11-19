@@ -2,13 +2,14 @@
 #include<iostream>
 #include<string>
 #include"Player.h"
+#include"Animation.h"
 using namespace std;
 using namespace sf;
 
 int main()
 {
 	RenderWindow window(VideoMode(1024, 1024), "Falling Sky[Remaster]", Style::Default);
-	Player player("GameAssets/Character/Knight.png", Vector2i(9, 1));
+	Player player("GameAssets/Character/Knight.png", Vector2u(9, 1));
 	Clock clock;
 	float Deltatime;
 	while (window.isOpen())
@@ -26,7 +27,7 @@ int main()
 				break;
 			}
 		}
-
+		//cout << Deltatime << endl;
 		player.Update(Deltatime, 0.2f);
 
 		window.clear();

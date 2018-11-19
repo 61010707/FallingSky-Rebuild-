@@ -8,16 +8,16 @@ using namespace sf;
 class Player
 {
 public:
-	Player(String PlayerPath, Vector2i SpriteCount);
+	Player(String PlayerPath, Vector2u SpriteCount);
 	~Player();
 
 	void CreateSprite();
-	void Update(float DeltaTime, float SwitchTime);
 	void draw(RenderWindow* window);
+	void Update(float DeltaTime, float SwitchTime);
 private:
 	Animation animation;
-	String PlayerPath;
-	Vector2i SpriteCount;
-	Texture Texture;
 	Sprite Sprite;
+	String PlayerPath;
+	Texture Texture;
+	Vector2u SpriteCount;
 };

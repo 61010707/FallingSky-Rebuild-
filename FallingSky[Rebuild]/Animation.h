@@ -7,14 +7,16 @@ using namespace sf;
 class Animation
 {
 public:
-	Animation(Vector2i SprtieCount);
+	Animation(Vector2u SprtieCount);
 	~Animation();
 
-	void animation(Sprite &sprite, float DeltaTime, float SwitchTime);
+	void animation(Sprite *sprite, float DeltaTime, float SwitchTime);
+	void UVrectCalculate(Sprite &sprite, Vector2u frame);
 private:
-	IntRect UVrect;
 	float TotalTime = 0.0f;
+	IntRect UVrect;
 	Sprite sprite;
+	Vector2u frame = Vector2u(0,0);
 	Vector2u Size;
-	Vector2i SpriteCount;
+	Vector2u SpriteCount;
 };
