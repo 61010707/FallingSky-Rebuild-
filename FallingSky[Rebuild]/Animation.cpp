@@ -1,18 +1,15 @@
 #include "Animation.h"
 
-
-
 Animation::Animation(Vector2i SprtieCount)
 {
 	this->SpriteCount = SprtieCount;
 }
 
-
 Animation::~Animation()
 {
 }
 
-void Animation::animation(Sprite &sprite,float DeltaTime, float SwitchTime)
+void Animation::animation(Sprite &sprite, float DeltaTime, float SwitchTime)
 {
 	this->sprite = sprite;
 	Size = sprite.getTexture()->getSize();

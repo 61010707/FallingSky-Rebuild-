@@ -10,7 +10,7 @@ public:
 	Animation(Vector2i SprtieCount);
 	~Animation();
 
-	void animation(Sprite &sprite,float DeltaTime,float SwitchTime);
+	void animation(Sprite &sprite, float DeltaTime, float SwitchTime);
 private:
 	IntRect UVrect;
 	float TotalTime = 0.0f;
@@ -18,4 +18,3 @@ private:
 	Vector2u Size;
 	Vector2i SpriteCount;
 };
-

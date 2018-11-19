@@ -17,10 +17,10 @@ void Player::CreateSprite()
 	Sprite.setTexture(Texture);
 }
 
-void Player::Update(float DeltaTime,float SwitchTime)
+void Player::Update(float DeltaTime, float SwitchTime)
 {
 	CreateSprite();
-	animation.animation(Sprite,DeltaTime,SwitchTime);
+	animation.animation(Sprite, DeltaTime, SwitchTime);
 }
 
 void Player::draw(RenderWindow * window)
