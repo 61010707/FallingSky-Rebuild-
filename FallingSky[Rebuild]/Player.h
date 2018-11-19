@@ -14,6 +14,7 @@ public:
 	void CreateSprite();
 	void draw(RenderWindow* window);
 	void Update(float DeltaTime, float SwitchTime);
+
 private:
 	Animation animation;
 	Sprite Sprite;
