@@ -18,20 +18,35 @@ void Animation::UVrectCalculate(Sprite & sprite, Vector2u frame)
 	UVrect.top = frame.y*UVrect.height;
 }
 
-void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
+void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime, bool CheckKey)
 {
-	sprite->setOrigin(8.0f,14.0f);
+	sprite->setOrigin(8.0f, 14.0f);
 	TotalTime += DeltaTime;
-
+	if (CheckKey)
+	{
+		KeyPress();
+	}
 	if (TotalTime > SwitchTime)
 	{
 		TotalTime -= SwitchTime;
 		frame.x++;
-		if (frame.x > SpriteCount.x - 1)
+		if (frame.x > Moving.x - 1)
 		{
 			frame.x = 0;
 		}
 		UVrectCalculate(*sprite, frame);
 		sprite->setTextureRect(UVrect);
+	}
+}
+
+void Animation::KeyPress()
+{
+	if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::D))
+	{
+		Moving.x = 9;
+	}
+	else
+	{
+		Moving.x = 5;
 	}
 }

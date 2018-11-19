@@ -12,7 +12,7 @@ void Move::KeyboardMove(Sprite *sprite)
 {
 	SpeedCharacter = Vector2f(0.0f, 0.0f);
 
-	Vector2f SpriteScale = sprite->getScale();
+	Vector2f SpriteScale = Vector2f(3.0f, 3.0f);
 
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
