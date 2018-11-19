@@ -28,7 +28,7 @@ int main()
 			}
 		}
 
-		player.Update(Deltatime, 0.2f);
+		player.Update(Deltatime, 0.15f);
 
 		window.clear();
 
