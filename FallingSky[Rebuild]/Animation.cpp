@@ -20,8 +20,6 @@ void Animation::UVrectCalculate(Sprite & sprite, Vector2u frame)
 
 void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 {
-	
-
 	TotalTime += DeltaTime;
 
 	if (TotalTime > SwitchTime)
@@ -36,4 +34,3 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 		sprite->setTextureRect(UVrect);
 	}
 }
-

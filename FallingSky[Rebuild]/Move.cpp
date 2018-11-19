@@ -1,30 +1,26 @@
 #include "Move.h"
 
-
-
 Move::Move()
 {
 }
-
 
 Move::~Move()
 {
 }
 
-void Move::KeyboardMove(Sprite *sprite,Vector2f Scale)
+void Move::KeyboardMove(Sprite *sprite, Vector2f Scale)
 {
-	SpeedCharacter = Vector2f(0.0f,0.0f);
+	SpeedCharacter = Vector2f(0.0f, 0.0f);
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
 		cout << "W" << endl;
 		SpeedCharacter.y = -speed;
-
 	}
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		cout << "A" << endl;
 		SpeedCharacter.x = -speed;
-		sprite->setScale(-3.0f,3.0f);
+		sprite->setScale(-3.0f, 3.0f);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
@@ -38,6 +34,4 @@ void Move::KeyboardMove(Sprite *sprite,Vector2f Scale)
 	}
 	cout << Scale.x << endl;
 	sprite->move(SpeedCharacter);
-	
-	
 }

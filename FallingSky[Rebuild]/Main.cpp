@@ -27,7 +27,7 @@ int main()
 				break;
 			}
 		}
-		
+
 		player.Update(Deltatime, 0.2f);
 
 		window.clear();
