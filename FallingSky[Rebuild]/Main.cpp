@@ -12,7 +12,6 @@ int main()
 
 	while (window.isOpen())
 	{
-		
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -25,9 +24,13 @@ int main()
 				break;
 			}
 		}
+
 		player.Update();
+
 		window.clear();
+
 		player.draw(&window);
+
 		window.display();
 	}
 	return 0;

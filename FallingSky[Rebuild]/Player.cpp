@@ -1,13 +1,10 @@
 #include "Player.h"
 
-
-
 Player::Player(String PlayerPath, Vector2i SpriteCount)
 {
 	this->PlayerPath = PlayerPath;
 	this->SpriteCount = SpriteCount;
 }
-
 
 Player::~Player()
 {

@@ -19,4 +19,3 @@ private:
 	Texture Texture;
 	Sprite Sprite;
 };
-
