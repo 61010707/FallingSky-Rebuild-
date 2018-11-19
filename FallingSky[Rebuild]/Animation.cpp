@@ -20,6 +20,7 @@ void Animation::UVrectCalculate(Sprite & sprite, Vector2u frame)
 
 void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 {
+	sprite->setOrigin(8.0f,14.0f);
 	TotalTime += DeltaTime;
 
 	if (TotalTime > SwitchTime)

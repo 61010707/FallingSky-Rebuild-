@@ -28,7 +28,7 @@ void Player::Update(float DeltaTime, float SwitchTime)
 {
 	CreateSprite();
 	animation.animation(&Sprite, DeltaTime, SwitchTime);
-	move.KeyboardMove(&Sprite, Scale);
+	move.KeyboardMove(&Sprite);
 }
 
 void Player::draw(RenderWindow * window)

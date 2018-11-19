@@ -8,19 +8,20 @@ Move::~Move()
 {
 }
 
-void Move::KeyboardMove(Sprite *sprite, Vector2f Scale)
+void Move::KeyboardMove(Sprite *sprite)
 {
 	SpeedCharacter = Vector2f(0.0f, 0.0f);
+
+	Vector2f SpriteScale = sprite->getScale();
+
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
-		cout << "W" << endl;
 		SpeedCharacter.y = -speed;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
-		cout << "A" << endl;
 		SpeedCharacter.x = -speed;
-		sprite->setScale(-3.0f, 3.0f);
+		SpriteScale.x = -(SpriteScale.x);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
@@ -30,8 +31,11 @@ void Move::KeyboardMove(Sprite *sprite, Vector2f Scale)
 	{
 		cout << "D" << endl;
 		SpeedCharacter.x = speed;
-		sprite->setScale(3.0f, 3.0f);
+		if (SpriteScale.x < 0.0f)
+		{
+			SpriteScale.x = -(SpriteScale.x);
+		}
 	}
-	cout << Scale.x << endl;
+	sprite->setScale(SpriteScale);
 	sprite->move(SpeedCharacter);
 }
