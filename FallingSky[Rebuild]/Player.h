@@ -24,4 +24,5 @@ private:
 	Texture Texture;
 	Vector2u SpriteCount;
 	Vector2f Scale=Vector2f(3.0f,3.0f);
+	IntRect UVrect;
 };

@@ -36,3 +36,4 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 		sprite->setTextureRect(UVrect);
 	}
 }
+

@@ -10,7 +10,7 @@ public:
 	Move();
 	~Move();
 
-	void KeyboardMove(Sprite *sprite);
+	void KeyboardMove(Sprite *sprite, Vector2f Scale);
 private:
 	Sprite sprite;
 	Vector2f SpeedCharacter= Vector2f(0.0f,0.0f);
