@@ -1,4 +1,4 @@
-#pragma 
+#pragma
 #include<SFML/Graphics.hpp>
 #include<iostream>
 #include<string>
@@ -9,5 +9,9 @@ class MapSprite
 public:
 	MapSprite();
 	~MapSprite();
+	void Create(String TexturePath);
+	void draw(RenderWindow*window);
+	Sprite sprite;
+private:
+	Texture texture;
 };
-

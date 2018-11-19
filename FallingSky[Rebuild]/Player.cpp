@@ -12,6 +12,7 @@ Player::Player(String PlayerPath, Vector2u SpriteCount) :
 	Sprite.setOrigin(0.0f, 0.0f);
 	Sprite.setTextureRect(IntRect(0, 0, 16, 28));
 	Sprite.setPosition(512, 512);
+	CreateSprite();
 }
 
 Player::~Player()
@@ -26,7 +27,6 @@ void Player::CreateSprite()
 
 void Player::Update(float DeltaTime, float SwitchTime)
 {
-	CreateSprite();
 	animation.animation(&Sprite, DeltaTime, SwitchTime, true);
 	move.KeyboardMove(&Sprite);
 }

@@ -8,10 +8,14 @@ using namespace sf;
 class Map
 {
 public:
-	Map();
+	Map(String MainMapPath, String CollisionMapPath);
 	~Map();
+	void Update();
+	void MapCollision();
+	void Draw(RenderWindow*window);
 private:
-	
-
+	MapSprite CollisionMap;
+	MapSprite MainMap;
+	String CollisionMapPath;
+	String MainMapPath;
 };
-

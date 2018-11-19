@@ -18,7 +18,7 @@ private:
 	IntRect UVrect;
 	Sprite sprite;
 	Vector2u frame = Vector2u(0, 0);
+	Vector2u Moving = SpriteCount;
 	Vector2u Size;
 	Vector2u SpriteCount;
-	Vector2u Moving = SpriteCount;
 };
