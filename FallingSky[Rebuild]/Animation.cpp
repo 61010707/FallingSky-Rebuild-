@@ -20,7 +20,7 @@ void Animation::UVrectCalculate(Sprite & sprite, Vector2u frame)
 
 void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 {
-	cout << "in animation" << endl;
+	
 
 	TotalTime += DeltaTime;
 

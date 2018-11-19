@@ -27,7 +27,7 @@ int main()
 				break;
 			}
 		}
-		//cout << Deltatime << endl;
+		
 		player.Update(Deltatime, 0.2f);
 
 		window.clear();

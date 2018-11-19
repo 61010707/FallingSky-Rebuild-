@@ -3,6 +3,7 @@
 #include<iostream>
 #include<string>
 #include"Animation.h"
+#include"Move.h"
 using namespace std;
 using namespace sf;
 class Player
@@ -17,8 +18,10 @@ public:
 
 private:
 	Animation animation;
+	Move move;
 	Sprite Sprite;
 	String PlayerPath;
 	Texture Texture;
 	Vector2u SpriteCount;
+	Vector2f Scale=Vector2f(3.0f,3.0f);
 };
