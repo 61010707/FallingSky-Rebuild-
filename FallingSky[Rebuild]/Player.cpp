@@ -19,7 +19,6 @@ void Player::CreateSprite()
 
 void Player::Update(float DeltaTime, float SwitchTime)
 {
-	
 	CreateSprite();
 	animation.animation(&Sprite, DeltaTime, SwitchTime);
 }

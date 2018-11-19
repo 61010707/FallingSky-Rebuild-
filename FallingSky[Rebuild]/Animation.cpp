@@ -9,7 +9,7 @@ Animation::~Animation()
 {
 }
 
-void Animation::UVrectCalculate(Sprite & sprite,Vector2u frame)
+void Animation::UVrectCalculate(Sprite & sprite, Vector2u frame)
 {
 	Size = sprite.getTexture()->getSize();
 	UVrect.width = Size.x / SpriteCount.x;
@@ -23,17 +23,16 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime)
 	cout << "in animation" << endl;
 
 	TotalTime += DeltaTime;
-	
-	if (TotalTime>SwitchTime)
+
+	if (TotalTime > SwitchTime)
 	{
 		TotalTime -= SwitchTime;
 		frame.x++;
 		if (frame.x > SpriteCount.x - 1)
 		{
 			frame.x = 0;
-		
 		}
-		UVrectCalculate(*sprite,frame);
+		UVrectCalculate(*sprite, frame);
 		sprite->setTextureRect(UVrect);
 	}
 }
