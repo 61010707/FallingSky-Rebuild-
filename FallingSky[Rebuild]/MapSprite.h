@@ -1,17 +1,13 @@
-#pragma once
+#pragma 
 #include<SFML/Graphics.hpp>
 #include<iostream>
 #include<string>
-#include"MapSprite.h"
 using namespace std;
 using namespace sf;
-class Map
+class MapSprite
 {
 public:
-	Map();
-	~Map();
-private:
-	
-
+	MapSprite();
+	~MapSprite();
 };
 
