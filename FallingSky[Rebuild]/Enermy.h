@@ -12,7 +12,7 @@ public:
 	~Enermy();
 
 	void Update();
-	void animation(float DeltaTime,float SwitchTime);
+	void animation(float DeltaTime,float SwitchTime, Sprite *Player);
 	void Move();
 	void Collision();
 	void CreateSprite(String EnermyPath);

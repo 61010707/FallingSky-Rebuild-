@@ -45,7 +45,7 @@ int main()
 		player->Update(Deltatime, 0.15f);
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x,PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); } 
-		aooni.animation(Deltatime, 0.15f);
+		aooni.animation(Deltatime, 0.15f,&player->sprite);
 
 		window.setView(view);
 		window.clear();

@@ -19,9 +19,10 @@ void Enermy::Update()
 {
 }
 
-void Enermy::animation(float DeltaTime, float SwitchTime)
+void Enermy::animation(float DeltaTime, float SwitchTime,Sprite *Player)
 {
 	EnermyAnimation.animationLayer(&sprite,DeltaTime,SwitchTime);
+	EnermyAnimation.EnermyMove(Player,&sprite);
 
 }
 
