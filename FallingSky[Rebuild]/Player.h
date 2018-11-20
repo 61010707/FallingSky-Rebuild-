@@ -4,6 +4,7 @@
 #include<string>
 #include"Animation.h"
 #include"Move.h"
+#include"Object.h"
 using namespace std;
 using namespace sf;
 class Player
@@ -15,14 +16,14 @@ public:
 	void CreateSprite();
 	void draw(RenderWindow* window);
 	void Update(float DeltaTime, float SwitchTime);
-
+	Sprite Sprite;
 private:
 	Animation animation;
 	IntRect UVrect;
 	Move move;
-	Sprite Sprite;
 	String PlayerPath;
 	Texture Texture;
 	Vector2f Scale;
 	Vector2u SpriteCount;
+	
 };

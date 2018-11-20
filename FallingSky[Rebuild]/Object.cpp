@@ -2,7 +2,7 @@
 
 
 
-Object::Object(String objectPath):MapObject()
+Object::Object(String objectPath):MapObject(),collision()
 {
 	MapObject.Create(objectPath);
 }
@@ -10,4 +10,9 @@ Object::Object(String objectPath):MapObject()
 
 Object::~Object()
 {
+}
+
+bool Object::CheckCollision(Sprite * object1)
+{
+	 return collision.PixelPerfectTest(*object1,MapObject.sprite,0);
 }
