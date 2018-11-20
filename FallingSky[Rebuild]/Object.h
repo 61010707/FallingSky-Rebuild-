@@ -15,6 +15,6 @@ public:
 	bool CheckCollision(Sprite *object1);
 	MapSprite MapObject;
 private:
-	
+
 	Collision collision;
 };
