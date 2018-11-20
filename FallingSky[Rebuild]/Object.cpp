@@ -14,5 +14,5 @@ Object::~Object()
 
 bool Object::CheckCollision(Sprite * object1)
 {
-	 return collision.PixelPerfectTest(*object1,MapObject.sprite,0);
+	 return collision.PixelPerfectTest(*object1,MapObject.sprite,-100);
 }

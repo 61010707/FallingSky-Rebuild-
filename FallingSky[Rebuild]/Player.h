@@ -16,7 +16,9 @@ public:
 	void CreateSprite();
 	void draw(RenderWindow* window);
 	void Update(float DeltaTime, float SwitchTime);
-	Sprite Sprite;
+	void SetPosition(Vector2f Positsion) {  }
+	
+	Sprite sprite;
 private:
 	Animation animation;
 	IntRect UVrect;

@@ -11,12 +11,12 @@ public:
 	~Animation();
 
 	void animation(Sprite *sprite, float DeltaTime, float SwitchTime, bool CheckKey);
+	void animationLayer(Sprite *sprite,float DeltaTime,float SwitchTime);
 	void KeyPress();
 	void UVrectCalculate(Sprite &sprite, Vector2u frame);
 private:
 	float TotalTime = 0.0f;
 	IntRect UVrect;
-	Sprite sprite;
 	Vector2u frame = Vector2u(0, 0);
 	Vector2u Moving = SpriteCount;
 	Vector2u Size;

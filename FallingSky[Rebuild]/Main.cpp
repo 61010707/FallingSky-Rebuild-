@@ -5,18 +5,21 @@
 #include"Animation.h"
 #include"Map.h"
 #include"Object.h"
+#include<vector>
 using namespace std;
 using namespace sf;
 
 int main()
 {
 	RenderWindow window(VideoMode(1024, 1024), "Falling Sky[Remaster]", Style::Default);
-	Player player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.5f, Vector2f(3.0f, 3.0f));
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.5f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/walls.png");
 	
 	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
-	
+	Vector2f PlayerPos;
 	Clock clock;
+	vector<Object> objects;
+
 	float Deltatime;
 	while (window.isOpen())
 	{
@@ -34,18 +37,16 @@ int main()
 			}
 		}
 
-		player.Update(Deltatime, 0.15f);
-
-		if (object->CheckCollision(&player.Sprite))
-		{
-			cout << "Collision" << endl;
-			player.Sprite.setPosition(player.Sprite.getPosition());
-		}
+		player->Update(Deltatime, 0.15f);
+	
+		
+		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x,PlayerPos.y); }
+		else { PlayerPos = player->sprite.getPosition(); } 
 		window.clear();
 
 		mainmap.Draw(&window);
 
-		player.draw(&window);
+		player->draw(&window);
 
 		window.display();
 	}
