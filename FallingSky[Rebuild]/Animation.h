@@ -11,9 +11,9 @@ public:
 	~Animation();
 
 	void animation(Sprite *sprite, float DeltaTime, float SwitchTime, bool CheckKey);
-	void animationLayer(Sprite *sprite,float DeltaTime,float SwitchTime);
+	void animationLayer(Sprite *sprite, float DeltaTime, float SwitchTime);
 	void KeyPress();
-	void EnermyMove(Sprite *player,Sprite *Enermy);
+	void EnermyMove(Sprite *player, Sprite *Enermy);
 	void UVrectCalculate(Sprite &sprite, Vector2u frame);
 private:
 	float TotalTime = 0.0f;

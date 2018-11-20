@@ -17,4 +17,3 @@ private:
 	MapSprite MapObject;
 	Collision collision;
 };
-

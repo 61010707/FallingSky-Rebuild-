@@ -23,7 +23,6 @@ void Player::CreateSprite()
 {
 	Texture.loadFromFile(PlayerPath);
 	sprite.setTexture(Texture);
-
 }
 
 void Player::Update(float DeltaTime, float SwitchTime)

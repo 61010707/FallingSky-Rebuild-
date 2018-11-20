@@ -17,7 +17,7 @@ public:
 	void draw(RenderWindow* window);
 	void Update(float DeltaTime, float SwitchTime);
 	void SetPosition(Vector2f Positsion) {  }
-	
+
 	Sprite sprite;
 private:
 	Animation animation;
@@ -27,5 +27,4 @@ private:
 	Texture Texture;
 	Vector2f Scale;
 	Vector2u SpriteCount;
-	
 };

@@ -36,7 +36,7 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime, boo
 void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTime)
 {
 	Vector2f Size = Vector2f(sprite->getTexture()->getSize().x, sprite->getTexture()->getSize().y);
-	Vector2f OriginPos = Vector2f(Size.x/(SpriteCount.x*2),Size.y/(SpriteCount.y*2));
+	Vector2f OriginPos = Vector2f(Size.x / (SpriteCount.x * 2), Size.y / (SpriteCount.y * 2));
 	sprite->setOrigin(OriginPos);
 	TotalTime += DeltaTime;
 
@@ -45,11 +45,10 @@ void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTim
 		TotalTime -= SwitchTime;
 		frame.x++;
 		if (frame.x > 3) { frame.x = 0; }
-		
+
 		UVrectCalculate(*sprite, frame);
 		sprite->setTextureRect(UVrect);
 	}
-	
 }
 
 void Animation::KeyPress()
@@ -67,11 +66,11 @@ void Animation::EnermyMove(Sprite * player, Sprite * Enermy)
 	{
 		frame.y = 2;
 	}
-	else if(PlayerPos.x <EnermyPos.x)
+	else if (PlayerPos.x < EnermyPos.x)
 	{
 		frame.y = 1;
 	}
-	else if(PlayerPos.y<EnermyPos.y)
+	else if (PlayerPos.y < EnermyPos.y)
 	{
 		frame.y = 3;
 	}

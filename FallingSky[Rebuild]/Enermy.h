@@ -8,11 +8,11 @@ using namespace sf;
 class Enermy
 {
 public:
-	Enermy(String EnermyPath,Vector2u SpriteCount);
+	Enermy(String EnermyPath, Vector2u SpriteCount);
 	~Enermy();
 
 	void Update();
-	void animation(float DeltaTime,float SwitchTime, Sprite *Player);
+	void animation(float DeltaTime, float SwitchTime, Sprite *Player);
 	void Move();
 	void Collision();
 	void CreateSprite(String EnermyPath);
@@ -22,6 +22,4 @@ private:
 	Texture texture;
 	Vector2u SpriteCount;
 	Animation EnermyAnimation;
-	
 };
-
