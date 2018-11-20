@@ -29,7 +29,7 @@ void Move::KeyboardMove(Sprite *sprite)
 {
 	SpeedCharacter = Vector2f(0.0f, 0.0f);
 
-	Vector2f SpriteScale = Vector2f(3.0f, 3.0f);
+	Vector2f SpriteScale = Scale;
 
 	if (Keyboard::isKeyPressed(Keyboard::W)) { SpeedCharacter.y = -speed; }
 	if (Keyboard::isKeyPressed(Keyboard::A)) { SpeedCharacter.x = -speed; SpriteScale.x = -(SpriteScale.x); }

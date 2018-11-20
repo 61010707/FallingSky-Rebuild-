@@ -5,7 +5,7 @@ Player::Player(String PlayerPath, Vector2u SpriteCount, float Speed, Vector2f Sc
 {
 	this->PlayerPath = PlayerPath;
 	this->SpriteCount = SpriteCount;
-
+	this->Scale = Scale;
 	Vector2f Origin = Vector2f(Texture.getSize().x / (SpriteCount.x*2.0f), Texture.getSize().y / 2.0f);
 
 	sprite.setScale(Scale);

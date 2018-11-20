@@ -11,14 +11,19 @@
 #include<vector>
 using namespace std;
 using namespace sf;
-
+void ResizeView(const sf::RenderWindow& window, sf::View& view)
+{
+	float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
+	view.setSize(1024, 840);
+}
 int main()
 {
 	RenderWindow window(VideoMode(840, 840), "Falling Sky[Remaster]", Style::Default);
+
 	View view(Vector2f(0.0f, 0.0f), Vector2f(512.0f, 512.f));
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.8f, Vector2f(3.0f, 3.0f));
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.8f, Vector2f(2.0f, 2.0f));
 	Map mainmap("GameAssets/Map/MapMain/walls.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.81f, Vector2f(1.4f, 1.4f));
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.81f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(300.0f, 300.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
 	Collision pixelcollision;
@@ -55,6 +60,9 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
+			case sf::Event::Resized:
+				ResizeView(window, view);
+				break;
 			default:
 				break;
 			}
@@ -78,7 +86,6 @@ int main()
 		{
 			break;
 		}
-
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 		window.setView(view);

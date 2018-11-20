@@ -2,7 +2,7 @@
 
 MapSprite::MapSprite()
 {
-	sprite.setScale(5.0f, 5.0f);
+	sprite.setScale(4.f, 4.f);
 }
 
 MapSprite::~MapSprite()
