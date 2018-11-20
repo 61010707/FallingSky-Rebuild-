@@ -2,9 +2,12 @@
 
 
 
-Enermy::Enermy(String EnermyPath)
+Enermy::Enermy(String EnermyPath, Vector2u SpriteCount):
+	EnermyAnimation(SpriteCount)
 {
+	this->SpriteCount = SpriteCount;
 	CreateSprite(EnermyPath);
+	sprite.setScale(1.5f,1.5f);
 }
 
 
@@ -18,6 +21,8 @@ void Enermy::Update()
 
 void Enermy::animation(float DeltaTime, float SwitchTime)
 {
+	EnermyAnimation.animationLayer(&sprite,DeltaTime,SwitchTime);
+
 }
 
 void Enermy::Move()

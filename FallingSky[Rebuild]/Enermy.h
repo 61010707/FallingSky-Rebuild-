@@ -8,7 +8,7 @@ using namespace sf;
 class Enermy
 {
 public:
-	Enermy(String EnermyPath);
+	Enermy(String EnermyPath,Vector2u SpriteCount);
 	~Enermy();
 
 	void Update();
@@ -20,6 +20,8 @@ public:
 	Sprite sprite;
 private:
 	Texture texture;
+	Vector2u SpriteCount;
+	Animation EnermyAnimation;
 	
 };
 
