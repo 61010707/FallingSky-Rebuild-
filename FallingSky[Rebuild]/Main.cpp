@@ -10,7 +10,7 @@ using namespace sf;
 int main()
 {
 	RenderWindow window(VideoMode(1024, 1024), "Falling Sky[Remaster]", Style::Default);
-	Player player("GameAssets/Character/Knight.png", Vector2u(9, 1));
+	Player player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.5f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/walls.png", "GameAssets/Map/MapCollision/walls_collisionWall.png");
 	Clock clock;
 	float Deltatime;

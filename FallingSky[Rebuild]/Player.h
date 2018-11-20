@@ -9,7 +9,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(String PlayerPath, Vector2u SpriteCount);
+	Player(String PlayerPath, Vector2u SpriteCount, float Speed, Vector2f Scale);
 	~Player();
 
 	void CreateSprite();
@@ -23,6 +23,6 @@ private:
 	Sprite Sprite;
 	String PlayerPath;
 	Texture Texture;
-	Vector2f Scale = Vector2f(3.0f, 3.0f);
+	Vector2f Scale;
 	Vector2u SpriteCount;
 };

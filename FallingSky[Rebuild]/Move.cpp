@@ -1,7 +1,9 @@
 #include "Move.h"
 
-Move::Move()
+Move::Move(float speed, Vector2f Scale)
 {
+	this->speed = speed;
+	this->Scale = Scale;
 }
 
 Move::~Move()
