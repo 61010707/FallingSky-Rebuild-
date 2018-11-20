@@ -39,6 +39,7 @@ void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTim
 	Vector2f Size = Vector2f(static_cast<float>(sprite->getTexture()->getSize().x), static_cast<float>(sprite->getTexture()->getSize().y));
 	Vector2f OriginPos = Vector2f(Size.x / (SpriteCount.x * 2), Size.y / (SpriteCount.y * 2));
 	sprite->setOrigin(OriginPos);
+	cout << UVrect.width << "  " << UVrect.height << endl;
 
 	TotalTime += DeltaTime;
 

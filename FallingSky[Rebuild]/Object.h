@@ -13,7 +13,8 @@ public:
 	~Object();
 
 	bool CheckCollision(Sprite *object1);
-private:
 	MapSprite MapObject;
+private:
+	
 	Collision collision;
 };

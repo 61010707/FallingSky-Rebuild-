@@ -6,6 +6,8 @@ Enermy::Enermy(String EnermyPath, Vector2u SpriteCount, float speed, Vector2f Sc
 	this->SpriteCount = SpriteCount;
 	CreateSprite(EnermyPath);
 	sprite.setScale(Scale);
+
+	sprite.setTextureRect(IntRect(0, 0, 64, 126));
 }
 
 Enermy::~Enermy()
