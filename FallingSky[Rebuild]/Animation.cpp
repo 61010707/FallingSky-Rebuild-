@@ -3,6 +3,7 @@
 Animation::Animation(Vector2u SprtieCount)
 {
 	this->SpriteCount = SprtieCount;
+	Moving = SpriteCount;
 }
 
 Animation::~Animation()
@@ -35,9 +36,10 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime, boo
 
 void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTime)
 {
-	Vector2f Size = Vector2f(sprite->getTexture()->getSize().x, sprite->getTexture()->getSize().y);
+	Vector2f Size =  Vector2f(static_cast<float>(sprite->getTexture()->getSize().x), static_cast<float>(sprite->getTexture()->getSize().y));
 	Vector2f OriginPos = Vector2f(Size.x / (SpriteCount.x * 2), Size.y / (SpriteCount.y * 2));
 	sprite->setOrigin(OriginPos);
+	
 	TotalTime += DeltaTime;
 
 	if (TotalTime > SwitchTime)
@@ -45,7 +47,6 @@ void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTim
 		TotalTime -= SwitchTime;
 		frame.x++;
 		if (frame.x > 3) { frame.x = 0; }
-
 		UVrectCalculate(*sprite, frame);
 		sprite->setTextureRect(UVrect);
 	}
@@ -62,20 +63,8 @@ void Animation::EnermyMove(Sprite * player, Sprite * Enermy)
 	Vector2f PlayerPos = Vector2f(player->getPosition());
 	Vector2f EnermyPos = Vector2f(Enermy->getPosition());
 
-	if (PlayerPos.x > EnermyPos.x)
-	{
-		frame.y = 2;
-	}
-	else if (PlayerPos.x < EnermyPos.x)
-	{
-		frame.y = 1;
-	}
-	else if (PlayerPos.y < EnermyPos.y)
-	{
-		frame.y = 3;
-	}
-	else
-	{
-		frame.y = 0;
-	}
+	if (PlayerPos.x > EnermyPos.x) { frame.y = 2; }
+	else if (PlayerPos.x < EnermyPos.x) { frame.y = 1; }
+	else if (PlayerPos.y < EnermyPos.y) { frame.y = 3; }
+	else { frame.y = 0; }
 }
