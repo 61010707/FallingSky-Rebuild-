@@ -35,7 +35,7 @@ int main()
 		window.clear();
 
 		mainmap.Draw(&window);
-		
+
 		player.draw(&window);
 
 		window.display();
