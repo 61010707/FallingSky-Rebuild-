@@ -35,9 +35,7 @@ void Animation::animation(Sprite *sprite, float DeltaTime, float SwitchTime, boo
 
 void Animation::animationLayer(Sprite * sprite, float DeltaTime, float SwitchTime)
 {
-	Vector2f OriginPos = Vector2f(sprite->getTexture()->getSize().x,sprite->getTexture()->getSize().y);
-	sprite->setOrigin(OriginPos
-	);
+	
 }
 
 void Animation::KeyPress()
