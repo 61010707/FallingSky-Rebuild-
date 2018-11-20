@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Player::Player(String PlayerPath, Vector2u SpriteCount,float Speed,Vector2f Scale) :
-	animation(SpriteCount), move(Speed,Scale)
+Player::Player(String PlayerPath, Vector2u SpriteCount, float Speed, Vector2f Scale) :
+	animation(SpriteCount), move(Speed, Scale)
 {
 	this->PlayerPath = PlayerPath;
 	this->SpriteCount = SpriteCount;

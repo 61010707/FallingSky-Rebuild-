@@ -7,7 +7,7 @@ using namespace sf;
 class Move
 {
 public:
-	Move(float speed,Vector2f Scale);
+	Move(float speed, Vector2f Scale);
 	~Move();
 
 	void KeyboardMove(Sprite *sprite);
