@@ -10,6 +10,21 @@ Move::~Move()
 {
 }
 
+void Move::EnermyMove(Sprite *player, Sprite *Enermy)
+{
+	Vector2f PlayerPos = Vector2f(player->getPosition());
+	Vector2f EnermyPos = Vector2f(Enermy->getPosition());
+
+	if (EnermyPos.x > PlayerPos.x) { SpeedCharacter.x = -speed; }
+	else if (EnermyPos.x < PlayerPos.x) { SpeedCharacter.x = speed; }
+	else { SpeedCharacter.x = 0.0f; }
+
+	if (EnermyPos.y > PlayerPos.y) { SpeedCharacter.y = -speed; }
+	else if (EnermyPos.y < PlayerPos.y) { SpeedCharacter.y = speed; }
+	else { SpeedCharacter.y = 0.0f; }
+	Enermy->move(SpeedCharacter);
+}
+
 void Move::KeyboardMove(Sprite *sprite)
 {
 	SpeedCharacter = Vector2f(0.0f, 0.0f);

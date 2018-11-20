@@ -1,19 +1,21 @@
 #include "Enermy.h"
 
-Enermy::Enermy(String EnermyPath, Vector2u SpriteCount) :
-	EnermyAnimation(SpriteCount)
+Enermy::Enermy(String EnermyPath, Vector2u SpriteCount, float speed, Vector2f Scale) :
+	EnermyAnimation(SpriteCount), EnermyMove(speed, Scale)
 {
 	this->SpriteCount = SpriteCount;
 	CreateSprite(EnermyPath);
-	sprite.setScale(1.5f, 1.5f);
+	sprite.setScale(Scale);
 }
 
 Enermy::~Enermy()
 {
 }
 
-void Enermy::Update()
+void Enermy::Update(float DeltaTime, float SwitchTime, Sprite *Player)
 {
+	animation(DeltaTime, SwitchTime, Player);
+	MoveMent(Player);
 }
 
 void Enermy::animation(float DeltaTime, float SwitchTime, Sprite *Player)
@@ -22,8 +24,9 @@ void Enermy::animation(float DeltaTime, float SwitchTime, Sprite *Player)
 	EnermyAnimation.EnermyMove(Player, &sprite);
 }
 
-void Enermy::Move()
+void Enermy::MoveMent(Sprite *Player)
 {
+	EnermyMove.EnermyMove(Player, &sprite);
 }
 
 void Enermy::Collision()

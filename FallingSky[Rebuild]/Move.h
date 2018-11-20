@@ -9,7 +9,8 @@ class Move
 public:
 	Move(float speed, Vector2f Scale);
 	~Move();
-	
+
+	void EnermyMove(Sprite *Player, Sprite *Enermy);
 	void KeyboardMove(Sprite *sprite);
 private:
 	float speed;

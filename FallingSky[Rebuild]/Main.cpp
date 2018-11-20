@@ -17,7 +17,7 @@ int main()
 
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.5f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/walls.png");
-	Enermy aooni("GameAssets/Monster/aooni.png", Vector2u(4, 4));
+	Enermy aooni("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.3f, Vector2f(1.1f, 1.1f));
 	aooni.sprite.setPosition(Vector2f(player->sprite.getPosition().x - 50.f, player->sprite.getPosition().y - 50.f));
 	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
 	Vector2f PlayerPos;
@@ -45,8 +45,8 @@ int main()
 		player->Update(Deltatime, 0.15f);
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); }
-		aooni.animation(Deltatime, 0.15f, &player->sprite);
 
+		aooni.Update(Deltatime, 0.15f, &player->sprite);
 		window.setView(view);
 		window.clear();
 
