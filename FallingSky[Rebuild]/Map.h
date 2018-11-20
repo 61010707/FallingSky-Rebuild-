@@ -8,7 +8,7 @@ using namespace sf;
 class Map
 {
 public:
-	Map(String MainMapPath, String CollisionMapPath);
+	Map(String MainMapPath);
 	~Map();
 	void Update();
 	void MapCollision();

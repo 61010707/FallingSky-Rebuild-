@@ -1,11 +1,9 @@
 #include "Map.h"
 
-Map::Map(String MainMapPath, String CollisionMapPath) :MainMap(), CollisionMap()
+Map::Map(String MainMapPath) :MainMap()
 {
 	this->MainMapPath = MainMapPath;
-	this->CollisionMapPath = CollisionMapPath;
-	MainMap.Create(MainMapPath);
-	CollisionMap.Create(CollisionMapPath);
+	Update();
 }
 
 Map::~Map()
@@ -19,11 +17,9 @@ void Map::Update()
 
 void Map::MapCollision()
 {
-	CollisionMap.Create(CollisionMapPath);
 }
 
 void Map::Draw(RenderWindow*window)
 {
-	CollisionMap.draw(window);
 	MainMap.draw(window);
 }

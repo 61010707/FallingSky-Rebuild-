@@ -11,7 +11,7 @@ int main()
 {
 	RenderWindow window(VideoMode(1024, 1024), "Falling Sky[Remaster]", Style::Default);
 	Player player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.5f, Vector2f(3.0f, 3.0f));
-	Map mainmap("GameAssets/Map/MapMain/walls.png", "GameAssets/Map/MapCollision/walls_collisionWall.png");
+	Map mainmap("GameAssets/Map/MapMain/walls.png");
 	Clock clock;
 	float Deltatime;
 	while (window.isOpen())
@@ -33,7 +33,9 @@ int main()
 		player.Update(Deltatime, 0.15f);
 
 		window.clear();
+
 		mainmap.Draw(&window);
+		
 		player.draw(&window);
 
 		window.display();
