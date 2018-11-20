@@ -7,6 +7,7 @@
 #include"Map.h"
 #include"Object.h"
 #include"Enermy.h"
+#include"Collision.h"
 #include<vector>
 using namespace std;
 using namespace sf;
@@ -20,6 +21,7 @@ int main()
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.81f, Vector2f(1.4f, 1.4f));
 	aooni->sprite.setPosition(Vector2f(300.0f, 300.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
+	Collision pixelcollision;
 
 	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos;
@@ -61,20 +63,22 @@ int main()
 		view.setCenter(PlayerPos);
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
-		//cout << DeltaDistance.x << "  " << DeltaDistance.y << endl;
 
 		if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
-		else if (DeltaDistance.x > 380.f) { aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
-		else if (DeltaDistance.y < -380.f) { aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
-		else if (DeltaDistance.y > 380.f) { aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
-		else
-		{
-			music.setVolume(100);
-		}
+		else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
+		else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
+		else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
+		else { music.setVolume(100); }
+
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); }
+		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
+		{
+			break;
+		}
+
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 		window.setView(view);
