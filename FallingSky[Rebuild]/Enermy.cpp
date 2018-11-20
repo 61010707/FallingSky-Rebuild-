@@ -12,6 +12,22 @@ Enermy::~Enermy()
 {
 }
 
+void Enermy::Update()
+{
+}
+
+void Enermy::animation(float DeltaTime, float SwitchTime)
+{
+}
+
+void Enermy::Move()
+{
+}
+
+void Enermy::Collision()
+{
+}
+
 void Enermy::CreateSprite(String EnermyPath)
 {
 	texture.loadFromFile(EnermyPath);

@@ -5,6 +5,7 @@
 #include"Animation.h"
 #include"Map.h"
 #include"Object.h"
+#include"Enermy.h"
 #include<vector>
 using namespace std;
 using namespace sf;
@@ -14,7 +15,7 @@ int main()
 	RenderWindow window(VideoMode(1024, 1024), "Falling Sky[Remaster]", Style::Default);
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.5f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/walls.png");
-	
+	Enermy aooni("");
 	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
 	Vector2f PlayerPos;
 	Clock clock;

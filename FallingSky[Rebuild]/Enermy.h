@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include<iostream>
 #include<string>
+#include"Animation.h"
 using namespace std;
 using namespace sf;
 class Enermy
@@ -19,5 +20,6 @@ public:
 	Sprite sprite;
 private:
 	Texture texture;
+	
 };
 
