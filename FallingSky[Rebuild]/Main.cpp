@@ -19,7 +19,6 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 int main()
 {
 	RenderWindow window(VideoMode(840, 840), "Falling Sky[Remaster]", Style::Default);
-
 	View view(Vector2f(0.0f, 0.0f), Vector2f(512.0f, 512.f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.6f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
@@ -49,6 +48,7 @@ int main()
 	int transparency = 0;
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	bool SpawnState = false;
+
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -67,13 +67,8 @@ int main()
 			case Event::KeyPressed:
 				switch (event.key.code)
 				{
-				case Keyboard::C:
-				{
-					window.close();
-					break;
-				}
-				default:
-					break;
+				case Keyboard::C: { window.close(); break; }
+				default: break;
 				}
 			default:
 				break;
@@ -90,24 +85,18 @@ int main()
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
 		}
-
 		if (SpawnState == false)
 		{
 			Isborn.restart();
 			spawntime = spawn.getElapsedTime();
-			if (spawntime.asSeconds() > 5.0f)
-			{
-				SpawnState = true;
-			}
+			if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; }
 		}
 		else
 		{
+			
 			spawn.restart();
 			isborn = Isborn.getElapsedTime();
-			if (isborn.asSeconds() > 5.0f)
-			{
-				SpawnState = false;
-			}
+			if (isborn.asSeconds() > 30.0f) { SpawnState = false; }
 		}
 
 		if (SpawnState == true)
@@ -118,11 +107,7 @@ int main()
 			else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
 			else { music.setVolume(100); }
 		}
-		else
-		{
-			aooni->sprite.setPosition(0, 0);
-			music.setVolume(0);
-		}
+		else { aooni->sprite.setPosition(0, 0); music.setVolume(0); }
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 

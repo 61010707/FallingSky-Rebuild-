@@ -19,9 +19,10 @@ public:
 	void CreateSprite(String EnermyPath);
 	void Draw(RenderWindow& window);
 	Sprite sprite;
+	Move EnermyMove;
 private:
 	Texture texture;
 	Vector2u SpriteCount;
 	Animation EnermyAnimation;
-	Move EnermyMove;
+	
 };

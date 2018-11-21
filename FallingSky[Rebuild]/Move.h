@@ -12,8 +12,9 @@ public:
 
 	void EnermyMove(Sprite *Player, Sprite *Enermy);
 	void KeyboardMove(Sprite *sprite);
-private:
 	float speed;
+private:
+	
 	Sprite sprite;
 	Vector2f Scale;
 	Vector2f SpeedCharacter = Vector2f(0.0f, 0.0f);
