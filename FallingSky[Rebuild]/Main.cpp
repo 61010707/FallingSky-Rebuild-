@@ -21,11 +21,12 @@ int main()
 	RenderWindow window(VideoMode(840, 840), "Falling Sky[Remaster]", Style::Default);
 
 	View view(Vector2f(0.0f, 0.0f), Vector2f(512.0f, 512.f));
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.8f, Vector2f(2.0f, 2.0f));
-	Map mainmap("GameAssets/Map/MapMain/walls.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.81f, Vector2f(1.f, 1.f));
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.6f, Vector2f(3.0f, 3.0f));
+	Map mainmap("GameAssets/Map/MapMain/Map.png");
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.35f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(300.0f, 300.0f));
-	Object *object = new Object("GameAssets/Map/MapCollision/walls_collisionWall.png");
+	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
+	Texture Maptex;
 	Collision pixelcollision;
 
 	vector<Object> objects;
@@ -63,21 +64,26 @@ int main()
 			case sf::Event::Resized:
 				ResizeView(window, view);
 				break;
+			case Event::KeyPressed:
+				switch (event.key.code)
+				{
+				case Keyboard::C:
+				{
+					window.close();
+					break;
+				}
+				default:
+					break;
+				}
 			default:
 				break;
 			}
 		}
-
 		view.setCenter(PlayerPos);
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
 
-		if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
-		else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
-		else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
-		else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
-		else { music.setVolume(100); }
-
+		
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
@@ -86,6 +92,12 @@ int main()
 		{
 		
 		}
+
+		if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
+		else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
+		else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
+		else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
+		else { music.setVolume(100); }
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 		window.setView(view);
