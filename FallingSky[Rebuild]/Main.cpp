@@ -24,14 +24,14 @@ int main()
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.6f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.35f, Vector2f(1.f, 1.f));
-	aooni->sprite.setPosition(Vector2f(300.0f, 300.0f));
+	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Collision pixelcollision;
 	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos;
 	Vector2f DeltaDistance;
-	Clock clock, clock1;
-	Time time;
+	Clock clock, clock1, spawn, Isborn;
+	Time time, spawntime, isborn;
 	float Deltatime;
 	Text text;
 	FloatRect interSect;
@@ -48,6 +48,7 @@ int main()
 	BGM.setLoop(true);
 	int transparency = 0;
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
+	bool SpawnState = false;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -90,33 +91,58 @@ int main()
 		{
 		}
 
-		if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
-		else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
-		else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
-		else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
-		else { music.setVolume(100); }
+		if (SpawnState == false)
+		{
+			Isborn.restart();
+			spawntime = spawn.getElapsedTime();
+			if (spawntime.asSeconds() > 5.0f)
+			{
+				SpawnState = true;
+			}
+		}
+		else
+		{
+			spawn.restart();
+			isborn = Isborn.getElapsedTime();
+			if (isborn.asSeconds() > 5.0f)
+			{
+				SpawnState = false;
+			}
+		}
+
+		if (SpawnState == true)
+		{
+			if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
+			else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
+			else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
+			else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
+			else { music.setVolume(100); }
+		}
+		else
+		{
+			aooni->sprite.setPosition(0, 0);
+			music.setVolume(0);
+		}
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
+
 		window.setView(view);
+
 		window.clear();
 
 		mainmap.Draw(&window);
-
 		player->draw(&window);
 		aooni->Draw(window);
 
 		if (time.asSeconds() > 1.0f)
 		{
-			if (transparency < 213)
-			{
-				transparency += 20;
-			}
-
+			if (transparency < 213) { transparency += 1; }
 			fade.setFillColor(Color(0, 0, 0, transparency));
 			clock1.restart();
 		}
 
 		window.draw(fade);
+
 		window.display();
 	}
 	return 0;
