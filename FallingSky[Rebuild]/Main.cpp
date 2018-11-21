@@ -84,7 +84,7 @@ int main()
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
-			break;
+		
 		}
 
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
