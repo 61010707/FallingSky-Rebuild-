@@ -26,9 +26,7 @@ int main()
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.35f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(300.0f, 300.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
-	Texture Maptex;
 	Collision pixelcollision;
-
 	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos;
 	Vector2f DeltaDistance;
@@ -48,7 +46,8 @@ int main()
 	BGM.setVolume(50);
 	BGM.play();
 	BGM.setLoop(true);
-
+	int transparency = 0;
+	RectangleShape fade(Vector2f(8400.f,8400.f));
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -61,9 +60,9 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
-			case sf::Event::Resized:
+	/*		case sf::Event::Resized:
 				ResizeView(window, view);
-				break;
+				break;*/
 			case Event::KeyPressed:
 				switch (event.key.code)
 				{
@@ -107,6 +106,21 @@ int main()
 
 		player->draw(&window);
 		aooni->Draw(window);
+
+			if (time.asSeconds() > 1.0f)
+			{
+				if (transparency < 213)
+				{
+					transparency += 20;
+				}
+				
+				
+				fade.setFillColor(Color(0, 0, 0, transparency));
+				clock1.restart();
+			}
+		
+		
+		window.draw(fade);
 		window.display();
 	}
 	return 0;
