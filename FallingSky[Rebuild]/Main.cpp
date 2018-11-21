@@ -47,7 +47,7 @@ int main()
 	BGM.play();
 	BGM.setLoop(true);
 	int transparency = 0;
-	RectangleShape fade(Vector2f(8400.f,8400.f));
+	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -60,9 +60,9 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
-	/*		case sf::Event::Resized:
-				ResizeView(window, view);
-				break;*/
+				/*		case sf::Event::Resized:
+							ResizeView(window, view);
+							break;*/
 			case Event::KeyPressed:
 				switch (event.key.code)
 				{
@@ -82,14 +82,12 @@ int main()
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
 
-		
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
-		
 		}
 
 		if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
@@ -107,19 +105,17 @@ int main()
 		player->draw(&window);
 		aooni->Draw(window);
 
-			if (time.asSeconds() > 1.0f)
+		if (time.asSeconds() > 1.0f)
+		{
+			if (transparency < 213)
 			{
-				if (transparency < 213)
-				{
-					transparency += 20;
-				}
-				
-				
-				fade.setFillColor(Color(0, 0, 0, transparency));
-				clock1.restart();
+				transparency += 20;
 			}
-		
-		
+
+			fade.setFillColor(Color(0, 0, 0, transparency));
+			clock1.restart();
+		}
+
 		window.draw(fade);
 		window.display();
 	}

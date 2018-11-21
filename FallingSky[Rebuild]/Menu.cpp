@@ -1,6 +1,5 @@
 #include "Menu.h"
 
-
 Menu::Menu(float width, float height)
 {
 	if (!font.loadFromFile("arial.ttf"))
@@ -25,7 +24,6 @@ Menu::Menu(float width, float height)
 
 	selectedItemIndex = 0;
 }
-
 
 Menu::~Menu()
 {
