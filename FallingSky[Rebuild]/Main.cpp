@@ -18,8 +18,8 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 }
 int main()
 {
-	RenderWindow window(VideoMode(840, 840), "Falling Sky[Remaster]", Style::Default);
-	View view(Vector2f(0.0f, 0.0f), Vector2f(512.0f, 512.f));
+	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
+	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f/1.5f, 720.0f/1.5f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.7f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.4f, Vector2f(1.f, 1.f));
