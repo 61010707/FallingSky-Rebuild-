@@ -10,6 +10,9 @@
 #include"Collision.h"
 #include"MapSprite.h"
 #include<vector>
+#include<time.h>
+#include<stdio.h>
+#include<stdlib.h>
 using namespace std;
 using namespace sf;
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
@@ -21,19 +24,18 @@ int main()
 {
 	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.7f, Vector2f(3.0f, 3.0f));
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.7f, Vector2f(1.f, 1.f));
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.0f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Collision pixelcollision;
 	vector<Object> objects;
-	Vector2f PlayerPos, EnermyPos,OldPlayerPos;
+	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2f DeltaDistance;
-	Clock clock, clock1, spawn, Isborn, count;
-	Time time, spawntime, isborn, timecount;
-	float Deltatime;
 
+	float Deltatime;
+	int randtime;
 	FloatRect interSect;
 	//---------------------//
 	Music music, BGM, step;
@@ -59,12 +61,29 @@ int main()
 
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	Vector2i mapframe = Vector2i(0, 0);
-
+	srand(time(NULL));
 	MapSprite item1, item2, item3;
-	item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
-	item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
-	item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
+	MapSprite item4, item5, item6;
+	MapSprite item7, item8, item9;
+	randtime = rand() % 3 + 1;
+	cout << randtime << endl;
+	if (randtime == 1)
+	{
+		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
+		item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
+		item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
+	}
 
+	if (randtime == 2) {
+		item4.Create("GameAssets/ITEM/item4-sprite.png"); item4.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item4.GetSize().x, item4.GetSize().y)));
+		item5.Create("GameAssets/ITEM/item5-sprite.png"); item5.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item5.GetSize().x, item5.GetSize().y)));
+		item6.Create("GameAssets/ITEM/item6-sprite.png"); item6.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item6.GetSize().x, item6.GetSize().y)));
+	}
+	if (randtime == 3) {
+		item7.Create("GameAssets/ITEM/item7-sprite.png"); item7.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item7.GetSize().x, item7.GetSize().y)));
+		item8.Create("GameAssets/ITEM/item8-sprite.png"); item8.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item8.GetSize().x, item8.GetSize().y)));
+		item9.Create("GameAssets/ITEM/item9-sprite.png"); item9.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item9.GetSize().x, item9.GetSize().y)));
+	}
 	Font font;
 	font.loadFromFile("GameAssets/FONT/Pspimpdeed.ttf");
 
@@ -77,13 +96,15 @@ int main()
 	name.setCharacterSize(80);
 	name.setString("Pasawee	laearun   61010707");
 	name.setFillColor(Color(255, 255, 255, 85));
+	Clock clock, clock1, spawn, Isborn, count;
+	Time time, spawntime, isborn, timecount;
 
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
 		time = clock1.getElapsedTime();
 		timecount = count.getElapsedTime();
-		
+
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -99,11 +120,10 @@ int main()
 				OldPlayerPos = player->sprite.getPosition();
 				switch (event.key.code)
 				{
-					
 				case Keyboard::C: { window.close(); break; }
-				case Keyboard::O: {player->sprite.setPosition(OldPlayerPos.x , OldPlayerPos.y-10); }
+				case Keyboard::O: {player->sprite.setPosition(OldPlayerPos.x, OldPlayerPos.y - 10); }
 				case Keyboard::K: {player->sprite.setPosition(OldPlayerPos.x - 10, OldPlayerPos.y); }
-				case Keyboard::L: {player->sprite.setPosition(OldPlayerPos.x , OldPlayerPos.y-10); }
+				case Keyboard::L: {player->sprite.setPosition(OldPlayerPos.x, OldPlayerPos.y - 10); }
 				case Keyboard::SemiColon: {player->sprite.setPosition(OldPlayerPos.x + 10, OldPlayerPos.y); }
 
 				default: break;
@@ -133,19 +153,8 @@ int main()
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
 		}
-		if (SpawnState == false)
-		{
-			Isborn.restart();
-			spawntime = spawn.getElapsedTime();
-			if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; }
-		}
-		else
-		{
-			spawn.restart();
-			isborn = Isborn.getElapsedTime();
-			if (isborn.asSeconds() > 30.0f) { SpawnState = false; }
-		}
-
+		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; } }
+		else { spawn.restart(); isborn = Isborn.getElapsedTime(); if (isborn.asSeconds() > 30.0f) { SpawnState = false; } }
 		if (SpawnState == true)
 		{
 			if (DeltaDistance.x < -700.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
@@ -167,7 +176,16 @@ int main()
 
 		mainmap.Draw(&window);
 		window.draw(animationMap);
-		item1.draw(&window); item2.draw(&window); item3.draw(&window);
+		if (randtime == 1) {
+			item1.draw(&window); item2.draw(&window); item3.draw(&window);
+		}
+		if (randtime == 2) {
+			item4.draw(&window); item5.draw(&window); item6.draw(&window);
+		}
+		if (randtime == 4) {
+			item7.draw(&window); item8.draw(&window); item9.draw(&window);
+		}
+
 		player->draw(&window);
 		aooni->Draw(window);
 
