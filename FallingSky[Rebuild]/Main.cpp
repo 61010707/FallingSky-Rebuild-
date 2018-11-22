@@ -8,6 +8,7 @@
 #include"Object.h"
 #include"Enermy.h"
 #include"Collision.h"
+#include"MapSprite.h"
 #include<vector>
 using namespace std;
 using namespace sf;
@@ -59,7 +60,10 @@ int main()
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	Vector2i mapframe = Vector2i(0,0);
 
-
+	MapSprite item1,item2,item3;
+	item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0,0),Vector2i(item1.GetSize().x,item1.GetSize().y)));
+	item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
+	item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -141,6 +145,9 @@ int main()
 
 		mainmap.Draw(&window);
 		window.draw(animationMap);
+		item1.draw(&window);
+		item2.draw(&window);
+		item3.draw(&window);
 		player->draw(&window);
 		aooni->Draw(window);
 

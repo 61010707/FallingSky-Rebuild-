@@ -11,6 +11,7 @@ public:
 	~MapSprite();
 	void Create(String TexturePath);
 	void draw(RenderWindow*window);
+	Vector2u GetSize() { return sprite.getTexture()->getSize(); }
 	Sprite sprite;
 private:
 	Texture texture;
