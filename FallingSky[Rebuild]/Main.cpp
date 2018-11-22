@@ -68,7 +68,9 @@ int main()
 				switch (event.key.code)
 				{
 				case Keyboard::C: { window.close(); break; }
+				case Keyboard::Q: {player->sprite.setPosition(PlayerPos.x - 10, PlayerPos.y); }
 				default: break;
+
 				}
 			default:
 				break;
@@ -78,6 +80,7 @@ int main()
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
 
+		//--------------------------------------------------------------------------------------------------//
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
@@ -108,8 +111,9 @@ int main()
 			else { music.setVolume(100); }
 		}
 		else { aooni->sprite.setPosition(0, 0); music.setVolume(0); }
-
+		//------------------------------------------------------------------------------------------------------------------------//
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
+
 
 		window.setView(view);
 
