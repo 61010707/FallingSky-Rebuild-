@@ -23,12 +23,23 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 int main()
 {
 	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
+
+
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.0f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
+	Object *objectitem1 = new Object("GameAssets/ITEM/item1Sprite.png");
+	Object *objectitem2 = new Object("GameAssets/ITEM/item2Sprite.png");
+	Object *objectitem3 = new Object("GameAssets/ITEM/item3Sprite.png");
+	Object *objectitem4 = new Object("GameAssets/ITEM/item4-sprite.png");
+	Object *objectitem5 = new Object("GameAssets/ITEM/item5-sprite.png");
+	Object *objectitem6 = new Object("GameAssets/ITEM/item6-sprite.png");
+	Object *objectitem7 = new Object("GameAssets/ITEM/item7-sprite.png");
+	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
+	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
 	Collision pixelcollision;
 	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
@@ -95,7 +106,13 @@ int main()
 	name.setFont(font);
 	name.setCharacterSize(80);
 	name.setString("Pasawee	laearun   61010707");
-	name.setFillColor(Color(255, 255, 255, 85));
+	name.setFillColor(Color(255, 255, 255, 80));
+
+	Text E;
+	name.setFont(font);
+	name.setCharacterSize(20);
+	name.setString("Press E");
+	name.setFillColor(Color(255, 255, 255, 255));
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
 
@@ -148,11 +165,29 @@ int main()
 		//--------------------------------------------------------------------------------------------------//
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
+		
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
 		}
+
+		if (randtime == 1)
+		{
+			if (objectitem1->CheckCollision(&player->sprite)) {
+				E.setPosition(PlayerPos);
+				window.draw(E);
+			}
+		}
+		if (randtime == 2)
+		{
+
+		}
+		if (randtime == 3)
+		{
+
+		}
+
 		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; } }
 		else { spawn.restart(); isborn = Isborn.getElapsedTime(); if (isborn.asSeconds() > 30.0f) { SpawnState = false; } }
 		if (SpawnState == true)
