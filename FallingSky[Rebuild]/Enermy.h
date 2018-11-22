@@ -24,5 +24,4 @@ private:
 	Texture texture;
 	Vector2u SpriteCount;
 	Animation EnermyAnimation;
-	
 };

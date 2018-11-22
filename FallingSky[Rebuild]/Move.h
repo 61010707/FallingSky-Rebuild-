@@ -14,7 +14,7 @@ public:
 	void KeyboardMove(Sprite *sprite);
 	float speed;
 private:
-	
+
 	Sprite sprite;
 	Vector2f Scale;
 	Vector2f SpeedCharacter = Vector2f(0.0f, 0.0f);
