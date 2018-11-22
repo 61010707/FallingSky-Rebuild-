@@ -9,13 +9,11 @@ class InputName
 public:
 	InputName();
 	~InputName();
-	
+
 	void INPUTNAME(RenderWindow *window);
-	
 	sf::String yourname;
-	std::string name;
+	string name;
 	sf::Text player;
 	sf::Font font;
 private:
 };
-

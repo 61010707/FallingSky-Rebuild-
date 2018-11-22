@@ -74,25 +74,7 @@ int main()
 	MapSprite item1, item2, item3;
 	MapSprite item4, item5, item6;
 	MapSprite item7, item8, item9;
-	randtime = rand() % 3 + 1;
-	int EndGameCount = 0;
-	if (randtime == 1)
-	{
-		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
-		item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
-		item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
-	}
 
-	if (randtime == 2) {
-		item4.Create("GameAssets/ITEM/item4-sprite.png"); item4.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item4.GetSize().x, item4.GetSize().y)));
-		item5.Create("GameAssets/ITEM/item5-sprite.png"); item5.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item5.GetSize().x, item5.GetSize().y)));
-		item6.Create("GameAssets/ITEM/item6-sprite.png"); item6.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item6.GetSize().x, item6.GetSize().y)));
-	}
-	if (randtime == 3) {
-		item7.Create("GameAssets/ITEM/item7-sprite.png"); item7.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item7.GetSize().x, item7.GetSize().y)));
-		item8.Create("GameAssets/ITEM/item8-sprite.png"); item8.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item8.GetSize().x, item8.GetSize().y)));
-		item9.Create("GameAssets/ITEM/item9-sprite.png"); item9.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item9.GetSize().x, item9.GetSize().y)));
-	}
 	Font font;
 	font.loadFromFile("GameAssets/FONT/Pspimpdeed.ttf");
 
@@ -116,10 +98,29 @@ int main()
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 
-
 	InputName input;
+
+	randtime = rand() % 3 + 1;
+	int EndGameCount = 0;
+	if (randtime == 1)
+	{
+		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
+		item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
+		item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
+	}
+
+	if (randtime == 2) {
+		item4.Create("GameAssets/ITEM/item4-sprite.png"); item4.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item4.GetSize().x, item4.GetSize().y)));
+		item5.Create("GameAssets/ITEM/item5-sprite.png"); item5.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item5.GetSize().x, item5.GetSize().y)));
+		item6.Create("GameAssets/ITEM/item6-sprite.png"); item6.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item6.GetSize().x, item6.GetSize().y)));
+	}
+	if (randtime == 3) {
+		item7.Create("GameAssets/ITEM/item7-sprite.png"); item7.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item7.GetSize().x, item7.GetSize().y)));
+		item8.Create("GameAssets/ITEM/item8-sprite.png"); item8.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item8.GetSize().x, item8.GetSize().y)));
+		item9.Create("GameAssets/ITEM/item9-sprite.png"); item9.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item9.GetSize().x, item9.GetSize().y)));
+	}
+
 	input.INPUTNAME(&window);
-	cout << input.name<< endl;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -141,7 +142,7 @@ int main()
 			default:  break;
 			}
 		}
-		
+
 		TotalTime += Deltatime;
 		if (TotalTime > SwitchTime)
 		{
@@ -230,7 +231,7 @@ int main()
 			else { E.setPosition(-110, -110); }
 		}
 
-		if (EndGameCount == 3)
+		if (EndGameCount == 1)
 		{
 			break;
 		}
@@ -289,8 +290,8 @@ int main()
 		window.draw(E);
 		window.draw(input.player);
 		window.draw(fade);
-
 		window.display();
 	}
+
 	return 0;
 }
