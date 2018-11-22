@@ -30,10 +30,10 @@ int main()
 	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos;
 	Vector2f DeltaDistance;
-	Clock clock, clock1, spawn, Isborn;
-	Time time, spawntime, isborn;
+	Clock clock, clock1, spawn, Isborn, count;
+	Time time, spawntime, isborn, timecount;
 	float Deltatime;
-	Text text;
+
 	FloatRect interSect;
 	//---------------------//
 	Music music, BGM, step;
@@ -64,10 +64,25 @@ int main()
 	item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
 	item2.Create("GameAssets/ITEM/item2Sprite.png"); item2.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item2.GetSize().x, item2.GetSize().y)));
 	item3.Create("GameAssets/ITEM/item3Sprite.png"); item3.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item3.GetSize().x, item3.GetSize().y)));
+
+	Font font;
+	font.loadFromFile("GameAssets/FONT/Pspimpdeed.ttf");
+
+	Text text;
+	text.setFont(font);
+	text.setCharacterSize(50);
+
+	Text name;
+	name.setFont(font);
+	name.setCharacterSize(80);
+	name.setString("Pasawee	laearun   61010707");
+	name.setFillColor(Color(255, 255, 255, 85));
+
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
 		time = clock1.getElapsedTime();
+		timecount = count.getElapsedTime();
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -137,7 +152,10 @@ int main()
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 
 		window.setView(view);
-
+		name.setPosition(PlayerPos.x - 370, PlayerPos.y - 50);
+		text.setPosition(PlayerPos.x + 370, PlayerPos.y - 250);
+		String Timer = to_string(timecount.asSeconds());
+		text.setString(Timer);
 		window.clear();
 
 		mainmap.Draw(&window);
@@ -152,7 +170,8 @@ int main()
 			fade.setFillColor(Color(0, 0, 0, transparency));
 			clock1.restart();
 		}
-
+		window.draw(text);
+		window.draw(name);
 		window.draw(fade);
 
 		window.display();
