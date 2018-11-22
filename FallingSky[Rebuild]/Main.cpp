@@ -20,9 +20,9 @@ int main()
 {
 	RenderWindow window(VideoMode(840, 840), "Falling Sky[Remaster]", Style::Default);
 	View view(Vector2f(0.0f, 0.0f), Vector2f(512.0f, 512.f));
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.6f, Vector2f(3.0f, 3.0f));
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.7f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.35f, Vector2f(1.f, 1.f));
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.4f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Collision pixelcollision;
@@ -85,21 +85,19 @@ int main()
 				break;
 			}
 		}
-		view.setCenter(PlayerPos);
-		player->Update(Deltatime, 0.15f);
-		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
-		//--------------------------------------------------------------------------------------------------//
 		TotalTime += Deltatime;
 		if (TotalTime > SwitchTime)
 		{
 			TotalTime -= SwitchTime;
 			mapframe.y++;
-			if (mapframe.y > 2) {
-				mapframe.y = 0;
-			}
-			animationMap.setTextureRect(IntRect(Vector2i(0,mapframe.y*(animationtex.getSize().y / 3)),Vector2i(animationtex.getSize().x, animationtex.getSize().y / 3)));
-
+			if (mapframe.y > 2) { mapframe.y = 0; }
+			animationMap.setTextureRect(IntRect(Vector2i(0, mapframe.y*(animationtex.getSize().y / 3)), Vector2i(animationtex.getSize().x, animationtex.getSize().y / 3)));
 		}
+		view.setCenter(PlayerPos);
+		player->Update(Deltatime, 0.15f);
+		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
+		//--------------------------------------------------------------------------------------------------//
+		
 		//--------------------------------------------------------------------------------------------------//
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
@@ -154,6 +152,8 @@ int main()
 		window.draw(fade);
 
 		window.display();
+		
+		//sleep(milliseconds(5));
 	}
 	return 0;
 }
