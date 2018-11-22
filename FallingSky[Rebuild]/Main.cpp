@@ -24,7 +24,6 @@ int main()
 {
 	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
 
-
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
@@ -109,13 +108,13 @@ int main()
 	name.setFillColor(Color(255, 255, 255, 80));
 
 	Text E;
-	name.setFont(font);
-	name.setCharacterSize(20);
-	name.setString("Press E");
-	name.setFillColor(Color(255, 255, 255, 255));
+	E.setFont(font);
+	E.setCharacterSize(20);
+	E.setString("Press E");
+	E.setFillColor(Color(255, 255, 255, 255));
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
-
+	bool drawText = false;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -165,7 +164,7 @@ int main()
 		//--------------------------------------------------------------------------------------------------//
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
-		
+
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
@@ -175,17 +174,41 @@ int main()
 		if (randtime == 1)
 		{
 			if (objectitem1->CheckCollision(&player->sprite)) {
-				E.setPosition(PlayerPos);
-				window.draw(E);
+				cout << "item1" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+			}
+			else
+			{
+				E.setPosition(0, 0);
+				//drawText = false;
+			}
+			if (objectitem2->CheckCollision(&player->sprite)) {
+				cout << "item2" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+			}
+			else
+			{
+				E.setPosition(0, 0);
+				//drawText = false;
+			}
+			if (objectitem3->CheckCollision(&player->sprite)) {
+				cout << "item3" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+			}
+			else
+			{
+				E.setPosition(0, 0);
+				//drawText = false;
 			}
 		}
 		if (randtime == 2)
 		{
-
 		}
 		if (randtime == 3)
 		{
-
 		}
 
 		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; } }
@@ -233,6 +256,9 @@ int main()
 		window.draw(text);
 		window.draw(name);
 		window.draw(fade);
+		if (drawText == true) {
+			window.draw(E);
+		}
 
 		window.display();
 
