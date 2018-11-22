@@ -13,6 +13,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
+#include"InputName.h"
 using namespace std;
 using namespace sf;
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
@@ -116,8 +117,9 @@ int main()
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 
 
-
-
+	InputName input;
+	input.INPUTNAME(&window);
+	cout << input.name<< endl;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -139,6 +141,7 @@ int main()
 			default:  break;
 			}
 		}
+		
 		TotalTime += Deltatime;
 		if (TotalTime > SwitchTime)
 		{
@@ -160,6 +163,9 @@ int main()
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
 		}
+
+		input.player.setPosition(PlayerPos.x - 30, PlayerPos.y - 40);
+		input.player.setCharacterSize(20);
 
 		if (randtime == 1)
 		{
@@ -280,9 +286,8 @@ int main()
 		}
 		window.draw(text);
 		window.draw(name);
-
 		window.draw(E);
-
+		window.draw(input.player);
 		window.draw(fade);
 
 		window.display();
