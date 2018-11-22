@@ -49,6 +49,15 @@ int main()
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	bool SpawnState = false;
 
+	Texture animationtex;
+	animationtex.loadFromFile("GameAssets/Map/MapAnimation/Animation.png");
+	Sprite animationMap;
+	animationMap.setTexture(animationtex);
+	animationMap.setTextureRect(IntRect(0,0,animationtex.getSize().x,animationtex.getSize().y/3));
+	animationMap.setScale(3.f,3.f);
+
+	float TotalTime = 0.f, SwitchTime = 0.2f;
+	Vector2i mapframe = Vector2i(0,0);
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -79,7 +88,18 @@ int main()
 		view.setCenter(PlayerPos);
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
+		//--------------------------------------------------------------------------------------------------//
+		TotalTime += Deltatime;
+		if (TotalTime > SwitchTime)
+		{
+			TotalTime -= SwitchTime;
+			mapframe.y++;
+			if (mapframe.y > 2) {
+				mapframe.y = 0;
+			}
+			animationMap.setTextureRect(IntRect(Vector2i(0,mapframe.y*(animationtex.getSize().y / 3)),Vector2i(animationtex.getSize().x, animationtex.getSize().y / 3)));
 
+		}
 		//--------------------------------------------------------------------------------------------------//
 		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
 		else { EnermyPos = aooni->sprite.getPosition(); }
@@ -120,6 +140,7 @@ int main()
 		window.clear();
 
 		mainmap.Draw(&window);
+		window.draw(animationMap);
 		player->draw(&window);
 		aooni->Draw(window);
 
