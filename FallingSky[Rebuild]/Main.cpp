@@ -23,12 +23,12 @@ int main()
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 0.7f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.4f, Vector2f(1.f, 1.f));
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 0.7f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Collision pixelcollision;
 	vector<Object> objects;
-	Vector2f PlayerPos, EnermyPos;
+	Vector2f PlayerPos, EnermyPos,OldPlayerPos;
 	Vector2f DeltaDistance;
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
@@ -83,6 +83,7 @@ int main()
 		Deltatime = clock.restart().asSeconds();
 		time = clock1.getElapsedTime();
 		timecount = count.getElapsedTime();
+		
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -95,10 +96,16 @@ int main()
 							ResizeView(window, view);
 							break;*/
 			case Event::KeyPressed:
+				OldPlayerPos = player->sprite.getPosition();
 				switch (event.key.code)
 				{
+					
 				case Keyboard::C: { window.close(); break; }
-				case Keyboard::Q: {player->sprite.setPosition(PlayerPos.x - 10, PlayerPos.y); }
+				case Keyboard::O: {player->sprite.setPosition(OldPlayerPos.x , OldPlayerPos.y-10); }
+				case Keyboard::K: {player->sprite.setPosition(OldPlayerPos.x - 10, OldPlayerPos.y); }
+				case Keyboard::L: {player->sprite.setPosition(OldPlayerPos.x , OldPlayerPos.y-10); }
+				case Keyboard::SemiColon: {player->sprite.setPosition(OldPlayerPos.x + 10, OldPlayerPos.y); }
+
 				default: break;
 				}
 			default:
@@ -166,7 +173,7 @@ int main()
 
 		if (time.asSeconds() > 1.0f)
 		{
-			if (transparency < 213) { transparency += 1; }
+			transparency += 2;
 			fade.setFillColor(Color(0, 0, 0, transparency));
 			clock1.restart();
 		}
