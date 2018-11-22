@@ -77,6 +77,7 @@ int main()
 	MapSprite item7, item8, item9;
 	randtime = rand() % 3 + 1;
 	cout << randtime << endl;
+	int EndGameCount = 0;
 	if (randtime == 1)
 	{
 		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
@@ -115,6 +116,7 @@ int main()
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
 	bool drawText = false;
+	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -173,42 +175,151 @@ int main()
 
 		if (randtime == 1)
 		{
-			if (objectitem1->CheckCollision(&player->sprite)) {
+			if (objectitem1->CheckCollision(&player->sprite) && iT1 == true) {
 				cout << "item1" << endl;
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
 				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT1 = false;
+				}
 			}
 			else
 			{
-				E.setPosition(0, 0);
+				E.setPosition(-110, -110);
 				//drawText = false;
 			}
-			if (objectitem2->CheckCollision(&player->sprite)) {
+
+			if (objectitem2->CheckCollision(&player->sprite) && iT2 == true) {
 				cout << "item2" << endl;
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
 				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT2 = false;
+				}
 			}
 			else
 			{
-				E.setPosition(0, 0);
-				//drawText = false;
+				E.setPosition(-110, -110);
 			}
-			if (objectitem3->CheckCollision(&player->sprite)) {
+			if (objectitem3->CheckCollision(&player->sprite) && iT3 == true) {
 				cout << "item3" << endl;
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
 				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT3 = false;
+				}
 			}
 			else
 			{
-				E.setPosition(0, 0);
-				//drawText = false;
+				E.setPosition(-110, -110);
 			}
 		}
+
 		if (randtime == 2)
 		{
+			if (objectitem4->CheckCollision(&player->sprite) && iT4 == true) {
+				cout << "item1" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT4 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+				//drawText = false;
+			}
+
+			if (objectitem5->CheckCollision(&player->sprite) && iT5 == true) {
+				cout << "item2" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT5 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+			}
+			if (objectitem6->CheckCollision(&player->sprite) && iT6 == true) {
+				cout << "item3" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT6 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+			}
 		}
+
 		if (randtime == 3)
 		{
+			if (objectitem7->CheckCollision(&player->sprite) && iT7 == true) {
+				cout << "item1" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT7 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+				//drawText = false;
+			}
+
+			if (objectitem8->CheckCollision(&player->sprite) && iT8 == true) {
+				cout << "item2" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT8 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+			}
+			if (objectitem9->CheckCollision(&player->sprite) && iT9 == true) {
+				cout << "item3" << endl;
+				E.setPosition(PlayerPos.x, PlayerPos.y + 20);
+				drawText = true;
+				if (Keyboard::isKeyPressed(Keyboard::E))
+				{
+					EndGameCount += 1;
+					iT9 = false;
+				}
+			}
+			else
+			{
+				E.setPosition(-110, -110);
+			}
+		}
+
+		if (EndGameCount == 3)
+		{
+			break;
 		}
 
 		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; } }
@@ -221,7 +332,7 @@ int main()
 			else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
 			else { music.setVolume(100); }
 		}
-		else { aooni->sprite.setPosition(0, 0); music.setVolume(0); }
+		else { aooni->sprite.setPosition(-110, -110); music.setVolume(0); }
 		//------------------------------------------------------------------------------------------------------------------------//
 		aooni->Update(Deltatime, 0.15f, &player->sprite);
 
@@ -235,13 +346,37 @@ int main()
 		mainmap.Draw(&window);
 		window.draw(animationMap);
 		if (randtime == 1) {
-			item1.draw(&window); item2.draw(&window); item3.draw(&window);
+			if (iT1 == true) {
+				item1.draw(&window);
+			}
+			if (iT2 == true) {
+				item2.draw(&window);
+			}
+			if (iT3 == true) {
+				item3.draw(&window);
+			}
 		}
 		if (randtime == 2) {
-			item4.draw(&window); item5.draw(&window); item6.draw(&window);
+			if (iT4 == true) {
+				item4.draw(&window);
+			}
+			if (iT5 == true) {
+				item5.draw(&window);
+			}
+			if (iT6 == true) {
+				item6.draw(&window);
+			}
 		}
-		if (randtime == 4) {
-			item7.draw(&window); item8.draw(&window); item9.draw(&window);
+		if (randtime == 3) {
+			if (iT7 == true) {
+				item7.draw(&window);
+			}
+			if (iT8 == true) {
+				item8.draw(&window);
+			}
+			if (iT9 == true) {
+				item9.draw(&window);
+			}
 		}
 
 		player->draw(&window);
@@ -255,10 +390,10 @@ int main()
 		}
 		window.draw(text);
 		window.draw(name);
+
+		window.draw(E);
+
 		window.draw(fade);
-		if (drawText == true) {
-			window.draw(E);
-		}
 
 		window.display();
 
