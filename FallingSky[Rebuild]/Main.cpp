@@ -58,6 +58,8 @@ int main()
 
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	Vector2i mapframe = Vector2i(0,0);
+
+
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -122,9 +124,9 @@ int main()
 
 		if (SpawnState == true)
 		{
-			if (DeltaDistance.x < -380.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 285.f, PlayerPos.y); }
-			else if (DeltaDistance.x > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 285.f, PlayerPos.y); }
-			else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 300.f); }
+			if (DeltaDistance.x < -700.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
+			else if (DeltaDistance.x > 700.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 700.f, PlayerPos.y); }
+			else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 350.f); }
 			else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
 			else { music.setVolume(100); }
 		}

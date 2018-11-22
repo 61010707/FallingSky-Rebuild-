@@ -11,7 +11,7 @@ Player::Player(String PlayerPath, Vector2u SpriteCount, float Speed, Vector2f Sc
 	sprite.setScale(Scale);
 	sprite.setOrigin(0.0f, 0.0f);
 	sprite.setTextureRect(IntRect(0, 0, 16, 28));
-	sprite.setPosition(800, 800);
+	sprite.setPosition(120, 350);
 	CreateSprite();
 }
 
@@ -29,6 +29,7 @@ void Player::Update(float DeltaTime, float SwitchTime)
 {
 	animation.animation(&sprite, DeltaTime, SwitchTime, true);
 	move.KeyboardMove(&sprite);
+	
 }
 
 void Player::draw(RenderWindow * window)
