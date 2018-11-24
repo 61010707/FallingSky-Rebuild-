@@ -10,6 +10,10 @@ InputName::~InputName()
 
 void InputName::INPUTNAME(RenderWindow * window)
 {
+	YourName.setString("Name : ");
+	YourName.setCharacterSize(60);
+	YourName.setPosition(window->getSize().x/2 - 300,window->getSize().y/2);
+	YourName.setFont(font);
 	yourname.clear();
 	name = {};
 	player.setString(yourname);
@@ -25,7 +29,7 @@ void InputName::INPUTNAME(RenderWindow * window)
 					if ((event.text.unicode <= 128)) { player.setFont(font); player.setString(yourname); }
 				}
 				player.setCharacterSize(60);
-				player.setPosition(200.0f, 100.0f);
+				player.setPosition(window->getSize().x/2 -100  , window->getSize().y/2);
 			}
 			else if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Return) { player.setString(yourname); }
@@ -35,6 +39,7 @@ void InputName::INPUTNAME(RenderWindow * window)
 		if (Keyboard::isKeyPressed(Keyboard::Return)) { break; }
 		window->clear();
 		window->draw(player);
+		window->draw(YourName);
 		window->display();
 	}
 }

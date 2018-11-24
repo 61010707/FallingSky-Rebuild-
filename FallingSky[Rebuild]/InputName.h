@@ -16,4 +16,5 @@ public:
 	sf::Text player;
 	sf::Font font;
 private:
+	Text YourName;
 };

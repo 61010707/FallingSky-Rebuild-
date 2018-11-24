@@ -27,7 +27,7 @@ int main()
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
-	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.0f, Vector2f(1.f, 1.f));
+	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.1f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Object *objectitem1 = new Object("GameAssets/ITEM/item1Sprite.png");
@@ -120,7 +120,11 @@ int main()
 		item9.Create("GameAssets/ITEM/item9-sprite.png"); item9.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item9.GetSize().x, item9.GetSize().y)));
 	}
 
+	music.setVolume(0);
+	BGM.setVolume(0);
+
 	input.INPUTNAME(&window);
+
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -240,10 +244,10 @@ int main()
 		else { spawn.restart(); isborn = Isborn.getElapsedTime(); if (isborn.asSeconds() > 30.0f) { SpawnState = false; } }
 		if (SpawnState == true)
 		{
-			if (DeltaDistance.x < -700.0f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
-			else if (DeltaDistance.x > 700.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 700.f, PlayerPos.y); }
-			else if (DeltaDistance.y < -380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 350.f); }
-			else if (DeltaDistance.y > 380.f) { music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
+			if (DeltaDistance.x < -700.0f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
+			else if (DeltaDistance.x > 700.f) { aooni->EnermyMove.speed += 0.002f;  music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 700.f, PlayerPos.y); }
+			else if (DeltaDistance.y < -380.f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 350.f); }
+			else if (DeltaDistance.y > 380.f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
 			else { music.setVolume(100); }
 		}
 
