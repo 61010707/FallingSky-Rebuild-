@@ -17,4 +17,8 @@ public:
 	sf::Font font;
 private:
 	Text YourName;
+	Text Title1;
+	Text Title2;
+	int Blink = 0;
+	int delay = 0;
 };

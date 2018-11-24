@@ -10,10 +10,21 @@ InputName::~InputName()
 
 void InputName::INPUTNAME(RenderWindow * window)
 {
-	YourName.setString("Name : ");
+	YourName.setString("Name :  ");
 	YourName.setCharacterSize(60);
 	YourName.setPosition(window->getSize().x/2 - 300,window->getSize().y/2);
 	YourName.setFont(font);
+
+	Title1.setString(" What's your name ? ");
+	Title1.setCharacterSize(80);
+	Title1.setPosition(window->getSize().x / 2 - 370, window->getSize().y -700);
+	Title1.setFont(font);
+
+	Title2.setString("  Press Enter ");
+	Title2.setCharacterSize(40);
+	Title2.setPosition(window->getSize().x / 2 - 150, window->getSize().y - 100);
+	Title2.setFont(font);
+
 	yourname.clear();
 	name = {};
 	player.setString(yourname);
@@ -37,9 +48,17 @@ void InputName::INPUTNAME(RenderWindow * window)
 			if (event.type == sf::Event::Closed) window->close();
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Return)) { break; }
+		Blink += 1;
 		window->clear();
 		window->draw(player);
+		window->draw(Title1);
+		if (Blink >= 300) {
+			window->draw(Title2);
+			delay += 1; if (delay >= 300) { Blink = 0; delay = 0; }
+		}
+	
 		window->draw(YourName);
+		
 		window->display();
 	}
 }
