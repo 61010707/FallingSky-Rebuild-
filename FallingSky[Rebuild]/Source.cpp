@@ -23,7 +23,7 @@ using namespace sf;
 int main()
 {
 	// init - Class Constructor
-	RenderWindow window(VideoMode(1280,720),"Falling Sky [ReComponent]",Style::Default);
+	RenderWindow window(VideoMode(1280, 720), "Falling Sky [ReComponent]", Style::Default);
 	Clock clock, clock1, spawn, Isborn, count;
 	Collision pixelcollision;
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.1f, Vector2f(1.f, 1.f));
@@ -33,7 +33,7 @@ int main()
 	MapSprite item1, item2, item3;
 	MapSprite item4, item5, item6;
 	MapSprite item7, item8, item9;
-	Music BGM; 
+	Music BGM;
 	Music music;
 	Music step;
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
@@ -64,12 +64,44 @@ int main()
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	FloatRect interSect;
 	int EndGameCount = 0;
-	int randtime =0;
+	int randtime = 0;
 	int transparency = 0;
 	Vector2f DeltaDistance;
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2i mapframe = Vector2i(0, 0);
-	//init - object setting 
+	//init - object setting
+	animationMap.setScale(3.f, 3.f);
+	animationMap.setTexture(animationtex);
+	animationMap.setTextureRect(IntRect(0, 0, animationtex.getSize().x, animationtex.getSize().y / 3));
+	
+	animationtex.loadFromFile("GameAssets/Map/MapAnimation/Animation.png");
+	
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
+	
+	BGM.openFromFile("GameAssets/BGM/BGm.wav");
+	BGM.play();
+	BGM.setLoop(true);
+	BGM.setVolume(50);
+	
+	E.setCharacterSize(20);
+	E.setFillColor(Color(255, 255, 255, 255));
+	E.setFont(font);
+	E.setString("Press E");
+	
+	font.loadFromFile("GameAssets/FONT/Pspimpdeed.ttf");
+	
+	music.openFromFile("GameAssets/BGM/Walk.wav");
+	music.play();
+	music.setLoop(true);
+	music.setVolume(100);
+	
+	name.setCharacterSize(80);
+	name.setFillColor(Color(255, 255, 255, 80));
+	name.setFont(font);
+	name.setString("Pasawee	laearun   61010707");
+	
+	text.setCharacterSize(50);
+	text.setFont(font);
+	//init - End
 	return 0;
 }
