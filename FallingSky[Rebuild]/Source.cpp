@@ -46,6 +46,7 @@ int main()
 	Object *objectitem7 = new Object("GameAssets/ITEM/item7-sprite.png");
 	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
 	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
+	vector<Object*> item;
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	Sprite animationMap;
@@ -125,6 +126,18 @@ int main()
 	
 	text.setCharacterSize(50);
 	text.setFont(font);
+
+	item.push_back(object);
+	item.push_back(objectitem1);
+	item.push_back(objectitem2);
+	item.push_back(objectitem3);
+	item.push_back(objectitem4);
+	item.push_back(objectitem5);
+	item.push_back(objectitem6);
+	item.push_back(objectitem7);
+	item.push_back(objectitem8);
+	item.push_back(objectitem9);
+
 	//init - End
 
 	//Game Loop
@@ -143,12 +156,14 @@ int main()
 			default:  break;
 			}
 		}
+		Deltatime = clock.restart().asSeconds();
 		//Update
 		//State
 		switch (State)
 		{
 		case FirstPage:
 			cout << "First Page" << endl;
+
 			if (Keyboard::isKeyPressed(Keyboard::Return) )
 			{
 				State = NameInput;
@@ -201,7 +216,7 @@ int main()
 			break;
 		}
 			//State Loop
-		sleep(milliseconds(55));
+		sf::sleep(milliseconds(55));
 			//State Loop
 		//Update
 		//Render
