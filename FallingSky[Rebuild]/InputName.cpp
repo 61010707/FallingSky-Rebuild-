@@ -12,12 +12,12 @@ void InputName::INPUTNAME(RenderWindow * window)
 {
 	YourName.setString("Name :  ");
 	YourName.setCharacterSize(60);
-	YourName.setPosition(window->getSize().x/2 - 300,window->getSize().y/2);
+	YourName.setPosition(window->getSize().x / 2 - 300, window->getSize().y / 2);
 	YourName.setFont(font);
 
 	Title1.setString(" What's your name ? ");
 	Title1.setCharacterSize(80);
-	Title1.setPosition(window->getSize().x / 2 - 370, window->getSize().y -700);
+	Title1.setPosition(window->getSize().x / 2 - 370, window->getSize().y - 700);
 	Title1.setFont(font);
 
 	Title2.setString("  Press Enter ");
@@ -40,7 +40,7 @@ void InputName::INPUTNAME(RenderWindow * window)
 					if ((event.text.unicode <= 128)) { player.setFont(font); player.setString(yourname); }
 				}
 				player.setCharacterSize(60);
-				player.setPosition(window->getSize().x/2 -100  , window->getSize().y/2);
+				player.setPosition(window->getSize().x / 2 - 100, window->getSize().y / 2);
 			}
 			else if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Return) { player.setString(yourname); }
@@ -56,9 +56,9 @@ void InputName::INPUTNAME(RenderWindow * window)
 			window->draw(Title2);
 			delay += 1; if (delay >= 300) { Blink = 0; delay = 0; }
 		}
-	
+
 		window->draw(YourName);
-		
+
 		window->display();
 	}
 }
