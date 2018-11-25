@@ -1,20 +1,20 @@
-#include<SFML/Graphics.hpp>
-#include<SFML/Audio.hpp>
-#include<iostream>
-#include<string>
-#include"Player.h"
 #include"Animation.h"
-#include"Map.h"
-#include"Object.h"
-#include"Enermy.h"
 #include"Collision.h"
+#include"Enermy.h"
+#include"HighScore.h"
+#include"InputName.h"
+#include"Map.h"
 #include"MapSprite.h"
-#include<vector>
-#include<time.h>
+#include"Object.h" 
+#include"Player.h"
+#include<iostream>
+#include<SFML/Audio.hpp>
+#include<SFML/Graphics.hpp>
 #include<stdio.h>
 #include<stdlib.h>
-#include"InputName.h"
-#include"HighScore.h"
+#include<string>
+#include<time.h>
+#include<vector>
 using namespace std;
 using namespace sf;
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
@@ -24,12 +24,20 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 }
 int main()
 {
+
 	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
+	
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
+	
+	srand(time(NULL));
+
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
+	
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
+	
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.1f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
+	
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Object *objectitem1 = new Object("GameAssets/ITEM/item1Sprite.png");
 	Object *objectitem2 = new Object("GameAssets/ITEM/item2Sprite.png");
@@ -40,8 +48,8 @@ int main()
 	Object *objectitem7 = new Object("GameAssets/ITEM/item7-sprite.png");
 	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
 	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
+	
 	Collision pixelcollision;
-	vector<Object> objects;
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2f DeltaDistance;
 	float Deltatime;
@@ -58,12 +66,14 @@ int main()
 	BGM.setVolume(50);
 	BGM.play();
 	BGM.setLoop(true);
+	
 	int transparency = 0;
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	bool SpawnState = false;
 
 	Texture animationtex;
 	animationtex.loadFromFile("GameAssets/Map/MapAnimation/Animation.png");
+	
 	Sprite animationMap;
 	animationMap.setTexture(animationtex);
 	animationMap.setTextureRect(IntRect(0, 0, animationtex.getSize().x, animationtex.getSize().y / 3));
@@ -71,7 +81,8 @@ int main()
 
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	Vector2i mapframe = Vector2i(0, 0);
-	srand(time(NULL));
+	
+	
 	MapSprite item1, item2, item3;
 	MapSprite item4, item5, item6;
 	MapSprite item7, item8, item9;
@@ -94,17 +105,21 @@ int main()
 	E.setCharacterSize(20);
 	E.setString("Press E");
 	E.setFillColor(Color(255, 255, 255, 255));
+
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
+	
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
+	
 	HighScore highscore;
-
-		highscore.ReadFile(window);
+	
+	highscore.ReadFile(window);
 
 
 	randtime = rand() % 3 + 1;
 	int EndGameCount = 0;
+	
 	if (randtime == 1)
 	{
 		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
@@ -242,7 +257,7 @@ int main()
 			else { E.setPosition(-110, -110); }
 		}
 
-		if (EndGameCount == 1)
+		if (EndGameCount == 3)
 		{
 			highscore.WriteFile(input.player.getString(), timecount.asSeconds());
 			break;
