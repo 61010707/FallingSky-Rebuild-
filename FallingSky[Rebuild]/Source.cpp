@@ -77,9 +77,21 @@ int main()
 	int EndGameCount = 0;
 	int randtime = 0;
 	int transparency = 0;
+	enum GameState
+	{
+		FirstPage,
+		NameInput,
+		Tutorial,
+		Welcome,
+		GamePlay,
+		Dead,
+		Survior
+	};
+	int State = 0;
 	Vector2f DeltaDistance;
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2i mapframe = Vector2i(0, 0);
+	bool Hold = false;
 	//init - object setting
 	animationMap.setScale(3.f, 3.f);
 	animationMap.setTexture(animationtex);
@@ -124,7 +136,6 @@ int main()
 			switch (event.type) {
 			case Event::Closed: window.close(); break;
 			case Event::KeyPressed:
-				OldPlayerPos = player->sprite.getPosition();
 				switch (event.key.code) {
 				case Keyboard::C: { window.close(); break; }
 				default: break;
@@ -132,9 +143,72 @@ int main()
 			default:  break;
 			}
 		}
+		//Update
+		//State
+		switch (State)
+		{
+		case FirstPage:
+			cout << "First Page" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return) )
+			{
+				State = NameInput;
+				
+			}
+			break;
+		case NameInput:
+			cout << " NameInput" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = Tutorial;
+			}
+			break;
+		case Tutorial:
+			cout << "Tutorial" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = Welcome;
+			}
+			break;
+		case Welcome:
+			cout << "Welcome" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = GamePlay;
+			}
+			break;
+		case GamePlay:
+			cout << "Gameplay" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = Dead;
+			}
+			break;
+		case Dead:
+			cout << "Dead" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = Survior;
+			}
+			break;
+		case Survior:
+			cout << "Survior" << endl;
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				State = FirstPage;
+			}
+			break;
+		default:
+			break;
+		}
+			//State Loop
+		sleep(milliseconds(55));
+			//State Loop
+		//Update
+		//Render
+		//cout << "Render" << endl;
+		//Render
 	}
-	//Update
-	//Update
+	
 	//Game Loop
 	return 0;
 }
