@@ -53,12 +53,23 @@ int main()
 	Text name;
 	Text text;
 	Texture animationtex;
-	Time timefade, spawntime, isborn, timecount;
+	Time timefade; 
+	Time spawntime;
+	Time isborn;
+	Time timecount;
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	// init - variable
 	srand(static_cast<unsigned int>(time(NULL)));
 	bool drawText = false;
-	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
+	bool iT1 = true; 
+	bool iT2 = true;
+	bool iT3 = true;
+	bool iT4 = true;
+	bool iT5 = true;
+	bool iT6 = true;
+	bool iT7 = true;
+	bool iT8 = true;
+	bool iT9 = true;
 	bool SpawnState = false;
 	float Deltatime = 0.0f;
 	float TotalTime = 0.f, SwitchTime = 0.2f;
@@ -103,5 +114,27 @@ int main()
 	text.setCharacterSize(50);
 	text.setFont(font);
 	//init - End
+
+	//Game Loop
+	while (window.isOpen())
+	{
+		Event event;
+		while (window.pollEvent(event))
+		{
+			switch (event.type) {
+			case Event::Closed: window.close(); break;
+			case Event::KeyPressed:
+				OldPlayerPos = player->sprite.getPosition();
+				switch (event.key.code) {
+				case Keyboard::C: { window.close(); break; }
+				default: break;
+				}
+			default:  break;
+			}
+		}
+	}
+	//Update
+	//Update
+	//Game Loop
 	return 0;
 }
