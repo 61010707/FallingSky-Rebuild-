@@ -14,6 +14,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"InputName.h"
+#include"HighScore.h"
 using namespace std;
 using namespace sf;
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
@@ -97,8 +98,10 @@ int main()
 	Time time, spawntime, isborn, timecount;
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
+	HighScore highscore;
+	Score :
+		highscore.ReadFile(window);
 
-	InputName input;
 
 	randtime = rand() % 3 + 1;
 	int EndGameCount = 0;
@@ -123,6 +126,7 @@ int main()
 	music.setVolume(0);
 	BGM.setVolume(0);
 
+	InputName input;
 	input.INPUTNAME(&window);
 
 	while (window.isOpen())
@@ -167,6 +171,9 @@ int main()
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
+			highscore.WriteFile(input.player.getString(), 0.00);
+			break;
+			
 		}
 
 		input.player.setPosition(PlayerPos.x - 30, PlayerPos.y - 40);
@@ -237,6 +244,7 @@ int main()
 
 		if (EndGameCount == 1)
 		{
+			highscore.WriteFile(input.player.getString(), timecount.asSeconds());
 			break;
 		}
 
