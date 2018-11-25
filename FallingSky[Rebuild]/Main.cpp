@@ -99,7 +99,7 @@ int main()
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 	HighScore highscore;
-	Score :
+
 		highscore.ReadFile(window);
 
 
@@ -171,9 +171,9 @@ int main()
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
-			highscore.WriteFile(input.player.getString(), 0.00);
+
 			break;
-			
+	
 		}
 
 		input.player.setPosition(PlayerPos.x - 30, PlayerPos.y - 40);

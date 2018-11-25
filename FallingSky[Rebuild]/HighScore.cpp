@@ -1,11 +1,9 @@
 #include "HighScore.h"
 
-
-
 HighScore::HighScore()
 {
+	
 }
-
 
 HighScore::~HighScore()
 {
@@ -17,12 +15,13 @@ void HighScore::ReadFile(RenderWindow &window)
 	loadFile.open("example.txt");
 	while (!loadFile.eof()) {
 		string tempName;
-	 float tempScore;
+		float tempScore;
 		loadFile >> tempName >> tempScore;
 		cout << ">> \"" << tempName << "\" " << tempScore << endl;
 		scoreboard.push_back({ tempScore,tempName });
 	}
 	loadFile.close();
+	sort(scoreboard.begin(), scoreboard.end(), less<pair<float, string>>());
 	while (window.isOpen())
 	{
 		Event event;
@@ -30,7 +29,6 @@ void HighScore::ReadFile(RenderWindow &window)
 		{
 			switch (event.type) {
 			case Event::Closed: window.close(); break;
-				/*		case sf::Event::Resized: ResizeView(window, view); break;*/
 			case Event::KeyPressed:
 				switch (event.key.code) {
 				case Keyboard::C: { window.close(); break; }
@@ -39,11 +37,10 @@ void HighScore::ReadFile(RenderWindow &window)
 			default:  break;
 			}
 		}
-		cout << "inHighScore" << endl;
+		
 		window.clear();
 		int cnt = 0;
-		for (vector<pair<int, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
-			cout << "High ScoreBoard" << endl;
+		for (vector<pair<float, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
 			++cnt;
 			if (cnt > 5) break;
 			Font myfont;
@@ -52,12 +49,12 @@ void HighScore::ReadFile(RenderWindow &window)
 			a.setString(to_string(i->first));
 			a.setFont(myfont);
 			a.setCharacterSize(40);
-			a.setPosition(700, 80 + (80 * cnt));
+			a.setPosition(static_cast<float>( 700),static_cast<float>( 80 + (80 * cnt)));
 			window.draw(a);
 			b.setString(i->second);
 			b.setFont(myfont);
 			b.setCharacterSize(40);
-			b.setPosition(100, 80 + (80 * cnt));
+			b.setPosition(static_cast<Vector2f>( Vector2i( 300, 80 + (80 * cnt))));
 			window.draw(b);
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Return))
@@ -66,12 +63,10 @@ void HighScore::ReadFile(RenderWindow &window)
 		}
 		window.display();
 	}
-	
 }
 
 void HighScore::WriteFile(string name, const float Score)
 {
-
 	ofstream myFile;
 	myFile.open("example.txt", ios::out | ios::app);
 	myFile << "\n" << name << " " << Score;

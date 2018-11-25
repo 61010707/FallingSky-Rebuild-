@@ -3,6 +3,8 @@
 #include<fstream>
 #include<string>
 #include<SFML/Graphics.hpp>
+#include<algorithm>
+#include<iomanip>
 using namespace std;
 using namespace sf;
 class HighScore
@@ -13,6 +15,6 @@ public:
 	void ReadFile(RenderWindow &window);
 	void WriteFile(string name,float Score);
 private:
-	vector<pair<int, string>> scoreboard;
+	vector<pair<float, string>> scoreboard;
 };
 
