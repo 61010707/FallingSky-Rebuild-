@@ -53,9 +53,23 @@ int main()
 	Text name;
 	Text text;
 	Texture animationtex;
-	Time time, spawntime, isborn, timecount;
+	Time timefade, spawntime, isborn, timecount;
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
-	// init
+	// init - variable
+	srand(static_cast<unsigned int>(time(NULL)));
+	bool drawText = false;
+	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
+	bool SpawnState = false;
+	float Deltatime = 0.0f;
+	float TotalTime = 0.f, SwitchTime = 0.2f;
+	FloatRect interSect;
+	int EndGameCount = 0;
+	int randtime =0;
+	int transparency = 0;
+	Vector2f DeltaDistance;
+	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
+	Vector2i mapframe = Vector2i(0, 0);
+	//init - object setting 
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	return 0;
 }
