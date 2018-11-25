@@ -1,37 +1,37 @@
-#include"Animation.h"
-#include"Collision.h"
-#include"Enermy.h"
-#include"HighScore.h"
-#include"InputName.h"
-#include"Map.h"
-#include"MapSprite.h"
-#include"Object.h" 
-#include"Player.h"
-#include<iostream>
-#include<SFML/Audio.hpp>
-#include<SFML/Graphics.hpp>
-#include<stdio.h>
-#include<stdlib.h>
-#include<string>
-#include<time.h>
-#include<vector>
-using namespace std;
-using namespace sf;
+//#include"Animation.h"
+//#include"Collision.h"
+//#include"Enermy.h"
+//#include"HighScore.h"
+//#include"InputName.h"
+//#include"Map.h"
+//#include"MapSprite.h"
+//#include"Object.h" 
+//#include"Player.h"
+//#include<iostream>
+//#include<SFML/Audio.hpp>
+//#include<SFML/Graphics.hpp>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string>
+//#include<time.h>
+//#include<vector>
+//using namespace std;
+//using namespace sf;
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
 {
 	float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
 	view.setSize(1024, 840);
 }
-int main()
+int main_old()
 {
 
-	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
+	/*RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
 	
-	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
+	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));*/
 	
 	srand(time(NULL));
 
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
+	/*Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
 	
@@ -49,14 +49,16 @@ int main()
 	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
 	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
 	
-	Collision pixelcollision;
+	Collision pixelcollision;*/
+	
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2f DeltaDistance;
 	float Deltatime;
 	int randtime;
 	FloatRect interSect;
 	//---------------------//
-	Music music, BGM, step;
+	/*Music music, BGM, step;
+	*/
 	music.openFromFile("GameAssets/BGM/Walk.wav");
 	music.setVolume(100);
 	music.play();

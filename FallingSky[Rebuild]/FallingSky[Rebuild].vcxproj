@@ -131,13 +131,13 @@
     <ClCompile Include="Enermy.cpp" />
     <ClCompile Include="HighScore.cpp" />
     <ClCompile Include="InputName.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapSprite.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
