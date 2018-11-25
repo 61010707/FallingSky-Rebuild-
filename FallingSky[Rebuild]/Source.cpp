@@ -22,13 +22,20 @@ using namespace sf;
 
 int main()
 {
-	// init
+	// init - Class Constructor
 	RenderWindow window(VideoMode(1280,720),"Falling Sky [ReComponent]",Style::Default);
-	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
-	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
-	Map mainmap("GameAssets/Map/MapMain/Map.png");
+	Clock clock, clock1, spawn, Isborn, count;
+	Collision pixelcollision;
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.1f, Vector2f(1.f, 1.f));
-	
+	Font font;
+	HighScore highscore;
+	Map mainmap("GameAssets/Map/MapMain/Map.png");
+	MapSprite item1, item2, item3;
+	MapSprite item4, item5, item6;
+	MapSprite item7, item8, item9;
+	Music BGM; 
+	Music music;
+	Music step;
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Object *objectitem1 = new Object("GameAssets/ITEM/item1Sprite.png");
 	Object *objectitem2 = new Object("GameAssets/ITEM/item2Sprite.png");
@@ -39,23 +46,15 @@ int main()
 	Object *objectitem7 = new Object("GameAssets/ITEM/item7-sprite.png");
 	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
 	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
-	Collision pixelcollision;
-	Music music;
-	Music BGM; 
-	Music step;
+	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
-	Texture animationtex;
 	Sprite animationMap;
-	MapSprite item1, item2, item3;
-	MapSprite item4, item5, item6;
-	MapSprite item7, item8, item9;
-	Font font;
-	Text text;
-	Text name;
 	Text E;
-	Clock clock, clock1, spawn, Isborn, count;
+	Text name;
+	Text text;
+	Texture animationtex;
 	Time time, spawntime, isborn, timecount;
-	HighScore highscore;
+	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 	// init
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
 	return 0;
