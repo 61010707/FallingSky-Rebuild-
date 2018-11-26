@@ -185,7 +185,7 @@ int main()
 	InputName input;
 	input.INPUTNAME(&window);
 	bool isDied = false;
-	clock.restart();
+	clock.restart().Zero;
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
