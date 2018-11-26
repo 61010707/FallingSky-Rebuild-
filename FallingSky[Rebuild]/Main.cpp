@@ -113,7 +113,23 @@ int main()
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 	
 	HighScore highscore;
-	
+	while (window.isOpen())
+	{
+		Event event;
+		while (window.pollEvent(event))
+		{
+			switch (event.type) {
+			case Event::Closed: window.close(); break;
+				
+			default:  break;
+			}
+		}
+	}
+
+
+
+
+
 	highscore.ReadFile(window);
 
 
