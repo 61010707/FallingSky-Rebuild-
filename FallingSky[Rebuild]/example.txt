@@ -9,3 +9,6 @@ camp 5.03315
  asd 5
  ada 8
  ds 1
+brazil 7
+ asa 7
+sd 1

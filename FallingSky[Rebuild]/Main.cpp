@@ -115,7 +115,8 @@ int main()
 	firstpage.loadFromFile("GameAssets/page/main.png");
 	Sprite FirstPage;
 	FirstPage.setTexture(firstpage);
-	FirstPage.setScale(.5f, .5f);
+	FirstPage.setScale(.35f, .35f);
+	FirstPage.setOrigin(firstpage.getSize().x / 2, firstpage.getSize().y / 2);
 
 	Texture diedpage;
 	diedpage.loadFromFile("GameAssets/page/Died.png");
@@ -157,6 +158,14 @@ int main()
 	bufferPickup.loadFromFile("GameAssets/BGM/pickup.WAV");
 	Sound Pickup;
 	Pickup.setBuffer(bufferPickup);
+	{FirstMenu:
+	view.setCenter(FirstPage.getPosition());
+	window.setView(view);
+	player->SetPosition(Vector2f(120, 350));
+	aooni->sprite.setPosition(Vector2f(-250, -250));
+	SpawnState = false;
+	GameState = 0;
+	sleep(milliseconds(90));
 	while (GameState == 0)
 	{
 		Event event;
@@ -178,7 +187,11 @@ int main()
 		window.display();
 		sleep(microseconds(300));
 	}
+	}
 
+	view.setCenter(window.getSize().x / 2, window.getSize().y / 2);
+	view.setSize(1280, 720);
+	window.setView(view);
 	highscore.ReadFile(window);
 
 	randtime = rand() % 3 + 1;
@@ -246,6 +259,7 @@ int main()
 			animationMap.setTextureRect(IntRect(Vector2i(0, mapframe.y*(animationtex.getSize().y / 3)), Vector2i(animationtex.getSize().x, animationtex.getSize().y / 3)));
 		}
 		view.setCenter(PlayerPos);
+		view.setSize(1280 / 1.5, 720 / 1.5);
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
 		//--------------------------------------------------------------------------------------------------//
@@ -425,6 +439,9 @@ int main()
 		{
 			if (Keyboard::isKeyPressed(Keyboard::Return))
 			{
+				GameState = 0;
+
+				goto FirstMenu;
 				break;
 			}
 			view.setCenter(DiedPage.getPosition());
@@ -449,6 +466,8 @@ int main()
 		{
 			if (Keyboard::isKeyPressed(Keyboard::Return))
 			{
+				GameState = 0;
+				goto FirstMenu;
 				break;
 			}
 			view.setCenter(SurviorSprite.getPosition());
