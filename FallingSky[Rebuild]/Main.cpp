@@ -28,7 +28,7 @@ int main()
 
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 
-	srand( static_cast<unsigned int>( std::time(NULL)));
+	srand(static_cast<unsigned int>(std::time(NULL)));
 
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 
@@ -116,7 +116,7 @@ int main()
 	Sprite FirstPage;
 	FirstPage.setTexture(firstpage);
 	FirstPage.setScale(.35f, .35f);
-	FirstPage.setOrigin(static_cast<Vector2f>( Vector2u( firstpage.getSize().x / 2, firstpage.getSize().y / 2)));
+	FirstPage.setOrigin(static_cast<Vector2f>(Vector2u(firstpage.getSize().x / 2, firstpage.getSize().y / 2)));
 
 	Texture diedpage;
 	diedpage.loadFromFile("GameAssets/page/Died.png");
@@ -190,7 +190,7 @@ int main()
 	}
 	}
 
-	view.setCenter(static_cast<Vector2f>(  Vector2u( window.getSize().x / 2, window.getSize().y / 2)));
+	view.setCenter(static_cast<Vector2f>(Vector2u(window.getSize().x / 2, window.getSize().y / 2)));
 	view.setSize(1280, 720);
 	window.setView(view);
 	highscore.ReadFile(window);
@@ -237,7 +237,6 @@ int main()
 
 	while (window.isOpen())
 	{
-		
 		Deltatime = clock.restart().asSeconds();
 		time = clock1.getElapsedTime();
 		timecount = count.getElapsedTime();
@@ -267,7 +266,7 @@ int main()
 			animationMap.setTextureRect(IntRect(Vector2i(0, mapframe.y*(animationtex.getSize().y / 3)), Vector2i(animationtex.getSize().x, animationtex.getSize().y / 3)));
 		}
 		view.setCenter(PlayerPos);
-		view.setSize(static_cast<float>( 1280 / 1.5),static_cast<float>( 720 / 1.5));
+		view.setSize(static_cast<float>(1280 / 1.5), static_cast<float>(720 / 1.5));
 		player->Update(Deltatime, 0.15f);
 		DeltaDistance = Vector2f(EnermyPos.x - PlayerPos.x, EnermyPos.y - PlayerPos.y);
 		//--------------------------------------------------------------------------------------------------//
