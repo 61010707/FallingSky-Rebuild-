@@ -58,12 +58,12 @@ int main()
 	Music music, BGM, step;
 	music.openFromFile("GameAssets/BGM/Walk.wav");
 	music.setVolume(100);
-	music.play();
+	//music.play();
 	music.setLoop(true);
 
 	BGM.openFromFile("GameAssets/BGM/BGm.wav");
 	BGM.setVolume(50);
-	BGM.play();
+	//BGM.play();
 	BGM.setLoop(true);
 
 	int transparency = 0;
@@ -134,6 +134,29 @@ int main()
 	SurviorSprite.setOrigin(SurviorSize.x / 2, SurviorSize.y / 2);
 	bool isSurvior = false;
 	int GameState = 0;
+
+	SoundBuffer bufferIntro;
+	bufferIntro.loadFromFile("GameAssets/BGM/intro.WAV");
+	Sound Intro;
+	Intro.setBuffer(bufferIntro);
+	Intro.setLoop(true);
+	Intro.play();
+
+	SoundBuffer bufferDied;
+	bufferDied.loadFromFile("GameAssets/BGM/died.WAV");
+	Sound Died;
+	Died.setBuffer(bufferDied);
+
+	SoundBuffer bufferDead;
+	bufferDead.loadFromFile("GameAssets/BGM/Dead.WAV");
+	Sound Dead;
+	Dead.setBuffer(bufferDead);
+	Dead.setLoop(true);
+
+	SoundBuffer bufferPickup;
+	bufferPickup.loadFromFile("GameAssets/BGM/pickup.WAV");
+	Sound Pickup;
+	Pickup.setBuffer(bufferPickup);
 	while (GameState == 0)
 	{
 		Event event;
@@ -179,13 +202,19 @@ int main()
 		item9.Create("GameAssets/ITEM/item9-sprite.png"); item9.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item9.GetSize().x, item9.GetSize().y)));
 	}
 
-	music.setVolume(0);
-	BGM.setVolume(0);
 	String Timer;
 	InputName input;
 	input.INPUTNAME(&window);
 	bool isDied = false;
+	Intro.pause();
+	BGM.play();
+	music.play();
 	clock.restart().Zero;
+	count.restart().Zero;
+	spawn.restart().Zero;
+	spawntime.Zero;
+	time.Zero;
+
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();
@@ -229,6 +258,8 @@ int main()
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
+			Died.play();
+			Died.setVolume(300);
 			isDied = true;
 			break;
 		}
@@ -240,19 +271,23 @@ int main()
 		{
 			if (objectitem1->CheckCollision(&player->sprite) && iT1 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT1 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT1 = false; Pickup.play(); }
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem2->CheckCollision(&player->sprite) && iT2 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20);  drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1;  iT2 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1;  iT2 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem3->CheckCollision(&player->sprite) && iT3 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20);  drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT3 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT3 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 		}
@@ -261,19 +296,25 @@ int main()
 		{
 			if (objectitem4->CheckCollision(&player->sprite) && iT4 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT4 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT4 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem5->CheckCollision(&player->sprite) && iT5 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT5 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT5 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem6->CheckCollision(&player->sprite) && iT6 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT6 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT6 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 		}
@@ -282,19 +323,25 @@ int main()
 		{
 			if (objectitem7->CheckCollision(&player->sprite) && iT7 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT7 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT7 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem8->CheckCollision(&player->sprite) && iT8 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT8 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT8 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 
 			if (objectitem9->CheckCollision(&player->sprite) && iT9 == true) {
 				E.setPosition(PlayerPos.x, PlayerPos.y + 20); drawText = true;
-				if (Keyboard::isKeyPressed(Keyboard::E)) { EndGameCount += 1; iT9 = false; }
+				if (Keyboard::isKeyPressed(Keyboard::E)) {
+					EndGameCount += 1; iT9 = false; Pickup.play();
+				}
 			}
 			else { E.setPosition(-110, -110); }
 		}
@@ -363,8 +410,12 @@ int main()
 		window.display();
 	}
 
+	music.pause();
+	BGM.pause();
 	if (isDied == true)
 	{
+		Dead.play();
+		Dead.setVolume(300);
 		Text PressEnter;
 		PressEnter.setFont(font);
 		PressEnter.setCharacterSize(40);
@@ -387,6 +438,8 @@ int main()
 
 	if (isSurvior == true)
 	{
+		BGM.play();
+		BGM.setVolume(30);
 		Text PressEnter;
 		PressEnter.setFont(font);
 		PressEnter.setCharacterSize(80);
