@@ -5,7 +5,7 @@
 #include"InputName.h"
 #include"Map.h"
 #include"MapSprite.h"
-#include"Object.h" 
+#include"Object.h"
 #include"Player.h"
 #include<iostream>
 #include<SFML/Audio.hpp>
@@ -24,20 +24,19 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 }
 int main()
 {
-
 	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
-	
+
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
-	
+
 	srand(time(NULL));
 
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
-	
+
 	Map mainmap("GameAssets/Map/MapMain/Map.png");
-	
+
 	Enermy *aooni = new Enermy("GameAssets/Monster/aooni.png", Vector2u(4, 4), 1.1f, Vector2f(1.f, 1.f));
 	aooni->sprite.setPosition(Vector2f(0.0f, 0.0f));
-	
+
 	Object *object = new Object("GameAssets/Map/MapCollision/MapCollision.png");
 	Object *objectitem1 = new Object("GameAssets/ITEM/item1Sprite.png");
 	Object *objectitem2 = new Object("GameAssets/ITEM/item2Sprite.png");
@@ -48,7 +47,7 @@ int main()
 	Object *objectitem7 = new Object("GameAssets/ITEM/item7-sprite.png");
 	Object *objectitem8 = new Object("GameAssets/ITEM/item8-sprite.png");
 	Object *objectitem9 = new Object("GameAssets/ITEM/item9-sprite.png");
-	
+
 	Collision pixelcollision;
 	Vector2f PlayerPos, EnermyPos, OldPlayerPos;
 	Vector2f DeltaDistance;
@@ -66,14 +65,14 @@ int main()
 	BGM.setVolume(50);
 	BGM.play();
 	BGM.setLoop(true);
-	
+
 	int transparency = 0;
 	RectangleShape fade(Vector2f(8400.f, 8400.f));
 	bool SpawnState = false;
 
 	Texture animationtex;
 	animationtex.loadFromFile("GameAssets/Map/MapAnimation/Animation.png");
-	
+
 	Sprite animationMap;
 	animationMap.setTexture(animationtex);
 	animationMap.setTextureRect(IntRect(0, 0, animationtex.getSize().x, animationtex.getSize().y / 3));
@@ -81,8 +80,7 @@ int main()
 
 	float TotalTime = 0.f, SwitchTime = 0.2f;
 	Vector2i mapframe = Vector2i(0, 0);
-	
-	
+
 	MapSprite item1, item2, item3;
 	MapSprite item4, item5, item6;
 	MapSprite item7, item8, item9;
@@ -110,14 +108,31 @@ int main()
 	Time time, spawntime, isborn, timecount;
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
-	
+
 	HighScore highscore;
-	
+
 	Texture firstpage;
 	firstpage.loadFromFile("GameAssets/page/main.png");
 	Sprite FirstPage;
 	FirstPage.setTexture(firstpage);
 	FirstPage.setScale(.5f, .5f);
+
+	Texture diedpage;
+	diedpage.loadFromFile("GameAssets/page/Died.png");
+	Sprite DiedPage;
+	DiedPage.setTexture(diedpage);
+	DiedPage.setScale(.4f, .4f);
+	Vector2f DiedSize = static_cast<Vector2f>(DiedPage.getTexture()->getSize());
+	DiedPage.setOrigin(DiedSize.x / 2, DiedSize.y / 2);
+
+	Texture SurvirTex;
+	SurvirTex.loadFromFile("GameAssets/page/survior.png");
+	Sprite SurviorSprite;
+	SurviorSprite.setTexture(SurvirTex);
+	SurviorSprite.setScale(.35f, .35f);
+	Vector2f SurviorSize = static_cast<Vector2f>(SurviorSprite.getTexture()->getSize());
+	SurviorSprite.setOrigin(SurviorSize.x / 2, SurviorSize.y / 2);
+	bool isSurvior = false;
 	int GameState = 0;
 	while (GameState == 0)
 	{
@@ -134,23 +149,18 @@ int main()
 			GameState = 1;
 			break;
 		}
-		
+
 		window.clear();
 		window.draw(FirstPage);
 		window.display();
 		sleep(microseconds(300));
 	}
 
-
-
-
 	highscore.ReadFile(window);
-		
-
 
 	randtime = rand() % 3 + 1;
 	int EndGameCount = 0;
-	
+
 	if (randtime == 1)
 	{
 		item1.Create("GameAssets/ITEM/item1Sprite.png"); item1.sprite.setTextureRect(IntRect(Vector2i(0, 0), Vector2i(item1.GetSize().x, item1.GetSize().y)));
@@ -171,10 +181,10 @@ int main()
 
 	music.setVolume(0);
 	BGM.setVolume(0);
-
+	String Timer;
 	InputName input;
 	input.INPUTNAME(&window);
-
+	bool isDied = false;
 	clock.restart();
 	while (window.isOpen())
 	{
@@ -192,6 +202,7 @@ int main()
 				OldPlayerPos = player->sprite.getPosition();
 				switch (event.key.code) {
 				case Keyboard::C: { window.close(); break; }
+				case Keyboard::M: { EndGameCount = 3; break; }
 				default: break;
 				}
 			default:  break;
@@ -218,9 +229,8 @@ int main()
 		else { PlayerPos = player->sprite.getPosition(); }
 		if (pixelcollision.PixelPerfectTest(player->sprite, aooni->sprite, 0))
 		{
-
+			isDied = true;
 			break;
-	
 		}
 
 		input.player.setPosition(PlayerPos.x - 30, PlayerPos.y - 40);
@@ -289,9 +299,10 @@ int main()
 			else { E.setPosition(-110, -110); }
 		}
 
-		if (EndGameCount == 3)
+		if (EndGameCount >= 3)
 		{
-			highscore.WriteFile(input.player.getString(), timecount.asSeconds());
+			highscore.WriteFile(input.player.getString(),static_cast<int>( timecount.asSeconds()));
+			isSurvior = true;
 			break;
 		}
 
@@ -313,10 +324,9 @@ int main()
 		window.setView(view);
 		name.setPosition(PlayerPos.x - 370, PlayerPos.y - 50);
 		text.setPosition(PlayerPos.x + 370, PlayerPos.y - 250);
-		String Timer = to_string(timecount.asSeconds());
+		Timer = to_string(static_cast<int>( timecount.asSeconds()));
 		text.setString(Timer);
 		window.clear();
-
 		mainmap.Draw(&window);
 		window.draw(animationMap);
 		if (randtime == 1) {
@@ -349,8 +359,52 @@ int main()
 		window.draw(E);
 		window.draw(input.player);
 		window.draw(fade);
+
 		window.display();
 	}
 
+	if (isDied == true)
+	{
+		Text PressEnter;
+		PressEnter.setFont(font);
+		PressEnter.setCharacterSize(40);
+		PressEnter.setPosition(DiedPage.getPosition().x - 150, DiedPage.getPosition().y + 150);
+		PressEnter.setString("Press Enter to exit");
+		while (window.isOpen())
+		{
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				break;
+			}
+			view.setCenter(DiedPage.getPosition());
+			window.setView(view);
+			window.clear();
+			window.draw(DiedPage);
+			window.draw(PressEnter);
+			window.display();
+		}
+	}
+
+	if (isSurvior== true)
+	{
+		Text PressEnter;
+		PressEnter.setFont(font);
+		PressEnter.setCharacterSize(80);
+		PressEnter.setPosition(DiedPage.getPosition().x +20, DiedPage.getPosition().y -10);
+		PressEnter.setString(Timer);
+		while (window.isOpen())
+		{
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				break;
+			}
+			view.setCenter(SurviorSprite.getPosition());
+			window.setView(view);
+			window.clear();
+			window.draw(SurviorSprite);
+			window.draw(PressEnter);
+			window.display();
+		}
+	}
 	return 0;
 }

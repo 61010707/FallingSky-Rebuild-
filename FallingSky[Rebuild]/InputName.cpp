@@ -49,7 +49,7 @@ void InputName::INPUTNAME(RenderWindow * window)
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Return)) { break; }
 		Blink += 1;
-		window->clear();
+		window->clear(Color::Color(128, 0, 128));
 		window->draw(player);
 		window->draw(Title1);
 		if (Blink >= 300) {

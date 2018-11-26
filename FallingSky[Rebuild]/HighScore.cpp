@@ -2,7 +2,6 @@
 
 HighScore::HighScore()
 {
-	
 }
 
 HighScore::~HighScore()
@@ -45,24 +44,24 @@ void HighScore::ReadFile(RenderWindow &window)
 			default:  break;
 			}
 		}
-		
-		window.clear(Color::Color(119, 136, 153,255));
-		
+
+		window.clear(Color::Color(128, 0, 128));
+
 		int cnt = 0;
 		for (vector<pair<float, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
 			++cnt;
 			if (cnt > 5) break;
-			
+
 			Text a, b;
 			a.setString(to_string(i->first));
 			a.setFont(myfont);
 			a.setCharacterSize(40);
-			a.setPosition(static_cast<float>( 700),static_cast<float>( 80 + (80 * cnt)));
+			a.setPosition(static_cast<float>(700), static_cast<float>(80 + (80 * cnt)));
 			window.draw(a);
 			b.setString(i->second);
 			b.setFont(myfont);
 			b.setCharacterSize(40);
-			b.setPosition(static_cast<Vector2f>( Vector2i( 300, 80 + (80 * cnt))));
+			b.setPosition(static_cast<Vector2f>(Vector2i(300, 80 + (80 * cnt))));
 			window.draw(b);
 			window.draw(pressSpace);
 		}
@@ -71,7 +70,7 @@ void HighScore::ReadFile(RenderWindow &window)
 		{
 			break;
 		}
-		
+
 		window.display();
 	}
 }
