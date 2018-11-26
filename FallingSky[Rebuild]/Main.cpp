@@ -24,11 +24,11 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 }
 int main()
 {
-	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Default);
+	RenderWindow window(VideoMode(1280, 720), "Falling Sky[Remaster]", Style::Close | Style::Titlebar);
 
 	View view(Vector2f(0.0f, 0.0f), Vector2f(1280.0f / 1.5f, 720.0f / 1.5f));
 
-	srand(time(NULL));
+	srand(std::time(NULL));
 
 	Player *player = new Player("GameAssets/Character/Knight.png", Vector2u(9, 1), 1.0f, Vector2f(3.0f, 3.0f));
 
@@ -165,7 +165,7 @@ int main()
 	aooni->sprite.setPosition(Vector2f(-250, -250));
 	SpawnState = false;
 	GameState = 0;
-	sleep(milliseconds(90));
+	sf::sleep(milliseconds(90));
 	while (GameState == 0)
 	{
 		Event event;
@@ -173,6 +173,7 @@ int main()
 		{
 			switch (event.type) {
 			case Event::Closed: window.close(); break;
+
 			default:  break;
 			}
 		}
@@ -185,7 +186,7 @@ int main()
 		window.clear();
 		window.draw(FirstPage);
 		window.display();
-		sleep(microseconds(300));
+		sf::sleep(microseconds(300));
 	}
 	}
 
@@ -228,8 +229,15 @@ int main()
 	spawntime.Zero;
 	time.Zero;
 
+	player->sprite.setPosition(120, 350);
+	aooni->sprite.setPosition(Vector2f(-250, -250));
+	aooni->EnermyMove.speed = 1.0f;
+	SpawnState = false;
+	transparency = 0;
+
 	while (window.isOpen())
 	{
+		
 		Deltatime = clock.restart().asSeconds();
 		time = clock1.getElapsedTime();
 		timecount = count.getElapsedTime();
@@ -265,7 +273,7 @@ int main()
 		//--------------------------------------------------------------------------------------------------//
 
 		//--------------------------------------------------------------------------------------------------//
-		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); }
+		if (object->CheckCollision(&aooni->sprite)) { aooni->sprite.setPosition(EnermyPos.x, EnermyPos.y); aooni->EnermyMove.speed -= 0.000001; }
 		else { EnermyPos = aooni->sprite.getPosition(); }
 
 		if (object->CheckCollision(&player->sprite)) { player->sprite.setPosition(PlayerPos.x, PlayerPos.y); }
@@ -367,14 +375,14 @@ int main()
 			break;
 		}
 
-		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.01f; SpawnState = true; } }
+		if (SpawnState == false) { Isborn.restart(); spawntime = spawn.getElapsedTime(); if (spawntime.asSeconds() > 10.0f) { aooni->EnermyMove.speed += 0.0001f; SpawnState = true; } }
 		else { spawn.restart(); isborn = Isborn.getElapsedTime(); if (isborn.asSeconds() > 30.0f) { SpawnState = false; } }
 		if (SpawnState == true)
 		{
-			if (DeltaDistance.x < -700.0f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
-			else if (DeltaDistance.x > 700.f) { aooni->EnermyMove.speed += 0.002f;  music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 700.f, PlayerPos.y); }
-			else if (DeltaDistance.y < -380.f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 350.f); }
-			else if (DeltaDistance.y > 380.f) { aooni->EnermyMove.speed += 0.002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
+			if (DeltaDistance.x < -700.0f) { aooni->EnermyMove.speed += 0.000002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x - 700.f, PlayerPos.y); }
+			else if (DeltaDistance.x > 700.f) { aooni->EnermyMove.speed += 0.0000002f;  music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x + 700.f, PlayerPos.y); }
+			else if (DeltaDistance.y < -380.f) { aooni->EnermyMove.speed += 0.0000002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y - 350.f); }
+			else if (DeltaDistance.y > 380.f) { aooni->EnermyMove.speed += 0.0000002f; music.setVolume(0); aooni->sprite.setPosition(PlayerPos.x, PlayerPos.y + 285.f); }
 			else { music.setVolume(100); }
 		}
 

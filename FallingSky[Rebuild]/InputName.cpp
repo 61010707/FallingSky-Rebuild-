@@ -43,7 +43,13 @@ void InputName::INPUTNAME(RenderWindow * window)
 				player.setPosition(window->getSize().x / 2 - 100, window->getSize().y / 2);
 			}
 			else if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Return) { player.setString(yourname); }
+				if (event.key.code == sf::Keyboard::Return) {
+					if (yourname.getSize() == 0)
+					{
+						yourname += "unknown";
+					}
+					player.setString(yourname);
+				}
 			}
 			if (event.type == sf::Event::Closed) window->close();
 		}

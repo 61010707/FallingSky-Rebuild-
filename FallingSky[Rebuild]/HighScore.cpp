@@ -16,7 +16,7 @@ void HighScore::ReadFile(RenderWindow &window)
 	pressSpace.setFont(myfont);
 	pressSpace.setCharacterSize(40);
 	pressSpace.setString(" Press	Spacebar");
-	pressSpace.setPosition(window.getSize().x / 2 - 200, window.getSize().y - 100);
+	pressSpace.setPosition(static_cast<Vector2f>(Vector2u(window.getSize().x / 2 - 200, window.getSize().y - 100)));
 	scoreboard.clear();
 	ifstream loadFile;
 	loadFile.open("example.txt");
@@ -28,7 +28,7 @@ void HighScore::ReadFile(RenderWindow &window)
 		scoreboard.push_back({ tempScore,tempName });
 	}
 	loadFile.close();
-	sort(scoreboard.begin(), scoreboard.end(), less<pair<float, string>>());
+	sort(scoreboard.begin(), scoreboard.end(), less<pair<int, string>>());
 	while (window.isOpen())
 	{
 		Event event;
@@ -48,7 +48,7 @@ void HighScore::ReadFile(RenderWindow &window)
 		window.clear(Color::Color(128, 0, 128));
 
 		int cnt = 0;
-		for (vector<pair<float, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
+		for (vector<pair<int, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
 			++cnt;
 			if (cnt > 5) break;
 
@@ -75,7 +75,7 @@ void HighScore::ReadFile(RenderWindow &window)
 	}
 }
 
-void HighScore::WriteFile(string name, const float Score)
+void HighScore::WriteFile(string name, const int Score)
 {
 	ofstream myFile;
 	myFile.open("example.txt", ios::out | ios::app);

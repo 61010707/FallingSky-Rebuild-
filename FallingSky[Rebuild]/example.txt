@@ -1,9 +1,9 @@
-th 26.3895
-braz 33.4961
-bas 1.79354
-fa 9.15405
-june 4.56984
-camp 5.03315
+th 26
+braz 33
+bas 1
+fa 9
+june 4
+camp 5
  hjdsf 10
  sdf 7
  asd 5
@@ -12,3 +12,6 @@ camp 5.03315
 brazil 7
  asa 7
 sd 1
+ju 2
+ghjkl 1
+  70
