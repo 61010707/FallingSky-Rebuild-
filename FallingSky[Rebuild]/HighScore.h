@@ -13,8 +13,7 @@ public:
 	HighScore();
 	~HighScore();
 	void ReadFile(RenderWindow &window);
-	void WriteFile(string name,float Score);
+	void WriteFile(string name, float Score);
 private:
 	vector<pair<float, string>> scoreboard;
 };
-

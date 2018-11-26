@@ -6,5 +6,5 @@ fa 9.15405
 camp 5.03315
  hjdsf 10
  sdf 7
-  4
  asd 5
+ ada 8

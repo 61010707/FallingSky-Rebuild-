@@ -301,7 +301,7 @@ int main()
 
 		if (EndGameCount >= 3)
 		{
-			highscore.WriteFile(input.player.getString(),static_cast<int>( timecount.asSeconds()));
+			highscore.WriteFile(input.player.getString(), static_cast<int>(timecount.asSeconds()));
 			isSurvior = true;
 			break;
 		}
@@ -324,7 +324,7 @@ int main()
 		window.setView(view);
 		name.setPosition(PlayerPos.x - 370, PlayerPos.y - 50);
 		text.setPosition(PlayerPos.x + 370, PlayerPos.y - 250);
-		Timer = to_string(static_cast<int>( timecount.asSeconds()));
+		Timer = to_string(static_cast<int>(timecount.asSeconds()));
 		text.setString(Timer);
 		window.clear();
 		mainmap.Draw(&window);
@@ -385,12 +385,12 @@ int main()
 		}
 	}
 
-	if (isSurvior== true)
+	if (isSurvior == true)
 	{
 		Text PressEnter;
 		PressEnter.setFont(font);
 		PressEnter.setCharacterSize(80);
-		PressEnter.setPosition(DiedPage.getPosition().x +20, DiedPage.getPosition().y -10);
+		PressEnter.setPosition(DiedPage.getPosition().x + 20, DiedPage.getPosition().y - 10);
 		PressEnter.setString(Timer);
 		while (window.isOpen())
 		{
