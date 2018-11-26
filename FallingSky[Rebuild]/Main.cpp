@@ -108,29 +108,44 @@ int main()
 
 	Clock clock, clock1, spawn, Isborn, count;
 	Time time, spawntime, isborn, timecount;
-	
 	bool drawText = false;
 	bool iT1 = true, iT2 = true, iT3 = true, iT4 = true, iT5 = true, iT6 = true, iT7 = true, iT8 = true, iT9 = true;
 	
 	HighScore highscore;
-	while (window.isOpen())
+	
+	Texture firstpage;
+	firstpage.loadFromFile("GameAssets/page/main.png");
+	Sprite FirstPage;
+	FirstPage.setTexture(firstpage);
+	FirstPage.setScale(.5f, .5f);
+	int GameState = 0;
+	while (GameState == 0)
 	{
 		Event event;
 		while (window.pollEvent(event))
 		{
 			switch (event.type) {
 			case Event::Closed: window.close(); break;
-				
 			default:  break;
 			}
 		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Return)) {
+			GameState = 1;
+			break;
+		}
+		
+		window.clear();
+		window.draw(FirstPage);
+		window.display();
+		sleep(microseconds(300));
 	}
 
 
 
 
-
 	highscore.ReadFile(window);
+		
 
 
 	randtime = rand() % 3 + 1;
@@ -160,6 +175,7 @@ int main()
 	InputName input;
 	input.INPUTNAME(&window);
 
+	clock.restart();
 	while (window.isOpen())
 	{
 		Deltatime = clock.restart().asSeconds();

@@ -11,6 +11,14 @@ HighScore::~HighScore()
 
 void HighScore::ReadFile(RenderWindow &window)
 {
+	Text pressSpace;
+	Font myfont;
+	myfont.loadFromFile("GameAssets/FONT/Roboto-Black.ttf");
+	pressSpace.setFont(myfont);
+	pressSpace.setCharacterSize(40);
+	pressSpace.setString(" Press	Spacebar");
+	pressSpace.setPosition(window.getSize().x / 2 - 200, window.getSize().y - 100);
+	scoreboard.clear();
 	ifstream loadFile;
 	loadFile.open("example.txt");
 	while (!loadFile.eof()) {
@@ -38,13 +46,13 @@ void HighScore::ReadFile(RenderWindow &window)
 			}
 		}
 		
-		window.clear();
+		window.clear(Color::Color(119, 136, 153,255));
+		
 		int cnt = 0;
 		for (vector<pair<float, string>>::iterator i = scoreboard.begin(); i != scoreboard.end(); ++i) {
 			++cnt;
 			if (cnt > 5) break;
-			Font myfont;
-			myfont.loadFromFile("GameAssets/FONT/Roboto-Black.ttf");
+			
 			Text a, b;
 			a.setString(to_string(i->first));
 			a.setFont(myfont);
@@ -56,11 +64,14 @@ void HighScore::ReadFile(RenderWindow &window)
 			b.setCharacterSize(40);
 			b.setPosition(static_cast<Vector2f>( Vector2i( 300, 80 + (80 * cnt))));
 			window.draw(b);
+			window.draw(pressSpace);
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Return))
+
+		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			break;
 		}
+		
 		window.display();
 	}
 }
